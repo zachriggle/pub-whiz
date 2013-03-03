@@ -3,7 +3,7 @@ Maxs
 
 Scraping Max's Taphouse and Cross-Referencing BeerAdvocate!
 
-I originally wanted to do all of this in a self-contained JS application, but it turns out that Google and Bing don't like you hammering on your servers, and Maxs.com has a restrictive `Access-Control-Allow-Origin` anyhow.  Python seemed like the next best option.
+I originally wanted to do all of this in a self-contained JS application, but it turns out that Google and Bing don't like you hammering on their servers, and Maxs.com has a restrictive `Access-Control-Allow-Origin` anyhow.  Python seemed like the next best option.
 
 Usage
 ====
