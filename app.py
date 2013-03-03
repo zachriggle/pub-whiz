@@ -40,7 +40,7 @@ for beer in beerNames:
         continue
 
     results = search(beer + searchQuery)
-    data = { 'score': 0, 'result': '' }
+    data = { 'score': 'N/A', 'result': '' }
     
     for result in results:
 

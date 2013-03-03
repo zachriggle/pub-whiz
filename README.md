@@ -11,10 +11,6 @@ Usage
 Example Output
 ====
 
-    ???: CCM Montseny Blat
-    ???: Malmgard Belge
-    ???: Saint Helene Simcoe Lager
-    ???: Stillwater Ales Classique
     100  Firestone Walker Sucaba
      97  Struise Pannepuet
      97  Ballast Point Victory At Sea
@@ -34,29 +30,29 @@ Example Output
      91  De Dolle Arabier
      91  Heavy Seas Loose Cannon
      90  Struise Tsjeeses
+     89  Dominion Oak Barrel Stout(Nitro)
      89  Flying Dog Double Dog (Nitro)
      89  De Landtsheer Malhuer 10
      89  Aecht Schlenkerla Helles
-     89  Dominion Oak Barrel Stout(Nitro)
-     88  Ritterguts Gose
      88  To Ol/Mikkeller Ov Ral IIPA
      88  Stillwater Lower Dens
      88  Lindemans Framboise
+     88  Ritterguts Gose
      88  Prairie Standard
-     88  Maine Mean Old Tom
      88  Stillwater/Hof Ten Dormaal Bronze Age
+     88  Maine Mean Old Tom
      88  Mikkeller 19
      87  Trois Dames Grande Dame
+     87  Brewers Art Resurrection
      87  Firestone Walker Walkers Reserve
      87  Contreras Valeir Extra
-     87  Brewers Art Resurrection
      87  Union Duckpin Pale Ale
      86  Union Balt Alt
      86  Oxbow Space Cowboy
      86  Local Option Dampf Loc
+     86  De La Senne Band of Brothers
      86  Belhaven Black (Nitro)
      86  Blue Mountain  Barrel Aged Dirty Belgian
-     86  De La Senne Band of Brothers
      86  Blue Mountain  Mandolin
      85  Local Option Morning Wood
      85  New Belgium/Dieu Du Ciel Heavenly Feijoa
@@ -71,8 +67,8 @@ Example Output
      83  Crispin Cider
      83  Scheldebrouwerij De Zeezuiper
      83  Struise Black Damnation VII Single Black
-     82  New Belgium Cascara Quad
      82  New Belgium Fat Tire
+     82  New Belgium Cascara Quad
      82  Alvinne Melchior
      82  Alvinne Gaspar
      82  Dilweyns Vicaris Triple Gueuze
@@ -82,26 +78,26 @@ Example Output
      81  Smisje Wostyntje
      80  Steigl Lager
      78  Magic Hat #9
-     78  Struise XX
      78  Yuengling Lager
+     78  Struise XX
      78  Fruli Strawberry
      78  Blue Moon White
      78  Elysian Mortis
-      0  CCM Montseny Blat
-      0  Stillwater Ales Classique
-      0  Saint Helene Simcoe Lager
-      0  Malmgard Belge
     N/A  Union Rye Baby IPA
+    N/A  CCM Montseny Blat
     N/A  Oxbow Freestyle 13
     N/A  Against The Grain Galangal Action
+    N/A  Stillwater Ales Classique
+    N/A  Saint Helene Simcoe Lager
     N/A  Trois Dames L'Amoureuse Rouge
     N/A  Thornbridge Beadeca's Well
     N/A  Achilles De Liter Van Pallieter
     N/A  Against The Grain Shit Jeans
     N/A  Mikkeller Yeast Series 2.0 Brett Lambicus
-    N/A  Burley Oak Rude Girl
     N/A  Mikkeller Yeast Series 2.0 Brett Bruxellensis
+    N/A  Burley Oak Rude Girl
     N/A  Maine Peeper
+    N/A  Malmgard Belge
     N/A  Het Nest Schuppenboer
     N/A  Struise XXXX Quad
     N/A  Against The Grain 2 Wheel Death Machine
