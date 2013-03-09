@@ -63,9 +63,9 @@ def getScore((a,b)):
     except: return -1
 
 for name,data in sorted(beerData.items(), key=getScore, reverse=True):
-    print "%3s " % data['score'],
-    print name
-
+    if name in beerNames:
+        print "%3s " % data['score'],
+        print name
 
 # pprint.pprint(beerData)
 
