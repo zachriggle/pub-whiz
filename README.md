@@ -16,9 +16,9 @@ BeautifulSoup 4
 Usage
 ====
 
-`python maxs.py`
-`python frisco.py`
-`python alehouse.py`
+    python maxs.py
+    python frisco.py
+    python alehouse.py
 
 Example Output
 ====
