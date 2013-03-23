@@ -68,6 +68,9 @@ def getScore((a,b)):
     try:    return int(b['score']) # 0 # return data['score']
     except: return -1
 
+import datetime
+print datetime.datetime.now()
+
 for name,data in sorted(beerData.items(), key=getScore, reverse=True):
     if name in beerNames:
         print "%3s " % data['score'],
