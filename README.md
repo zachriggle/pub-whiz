@@ -10,8 +10,8 @@ I originally wanted to do all of this in a self-contained JS application, but it
 Requirements
 ====
 
-Python 2.7
-BeautifulSoup 4
+- Python 2.7
+- BeautifulSoup 4
 
 Usage
 ====
