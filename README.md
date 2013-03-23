@@ -3,107 +3,112 @@ Maxs
 
 Scraping Max's Taphouse and Cross-Referencing BeerAdvocate!
 
+**Update**: Added functionality for Frisco Taphouse!
+
 I originally wanted to do all of this in a self-contained JS application, but it turns out that Google and Bing don't like you hammering on their servers, and Maxs.com has a restrictive `Access-Control-Allow-Origin` anyhow.  Python seemed like the next best option.
 
 Usage
 ====
 
-`python app.py`
+`python maxs.py`
+`python frisco.py`
 
 Example Output
 ====
-
-    100  Firestone Walker Sucaba
-     97  Struise Pannepuet
-     97  Ballast Point Victory At Sea
-     95  Firestone Walker XVI 16th Anniversary
-     94  Struise Sint Amatus
-     94  Against The Grain/De Molen Bo & Luke
-     93  Leifmans Goudenband
-     93  Oxbow Farmhouse pale
-     93  Allagash White
-     92  Struise Rio Reserva 2008
-     92  De Glazen Toren Saison De Epre Mere
-     92  Delirium Tremens
-     92  Allagash Grand Cru
-     92  Chimay Cinq Cents
-     91  Rodenbach Classic
-     91  Stillwater Ales Jaded
-     91  De Dolle Arabier
-     91  Heavy Seas Loose Cannon
-     90  Struise Tsjeeses
-     89  Dominion Oak Barrel Stout(Nitro)
-     89  Flying Dog Double Dog (Nitro)
-     89  De Landtsheer Malhuer 10
-     89  Aecht Schlenkerla Helles
-     88  To Ol/Mikkeller Ov Ral IIPA
-     88  Stillwater Lower Dens
-     88  Lindemans Framboise
-     88  Ritterguts Gose
-     88  Prairie Standard
-     88  Stillwater/Hof Ten Dormaal Bronze Age
-     88  Maine Mean Old Tom
-     88  Mikkeller 19
-     87  Trois Dames Grande Dame
-     87  Brewers Art Resurrection
-     87  Firestone Walker Walkers Reserve
-     87  Contreras Valeir Extra
-     87  Union Duckpin Pale Ale
-     86  Union Balt Alt
-     86  Oxbow Space Cowboy
-     86  Local Option Dampf Loc
-     86  De La Senne Band of Brothers
-     86  Belhaven Black (Nitro)
-     86  Blue Mountain  Barrel Aged Dirty Belgian
-     86  Blue Mountain  Mandolin
-     85  Local Option Morning Wood
-     85  New Belgium/Dieu Du Ciel Heavenly Feijoa
-     85  De Le Senne Zwarte Piet
-     85  Hof Ten Dormaal BA Series Armagnac
-     84  Strubbe Ichtegems Grand Cru
-     84  Hofbrau Hefeweizen
-     84  Oskar Blues Gubna
-     84  Guinness Stout
-     84  Dogfish Head Rhizing Bines
-     83  Vapeur Saison De Pipaix
-     83  Crispin Cider
-     83  Scheldebrouwerij De Zeezuiper
-     83  Struise Black Damnation VII Single Black
-     82  New Belgium Fat Tire
-     82  New Belgium Cascara Quad
-     82  Alvinne Melchior
-     82  Alvinne Gaspar
-     82  Dilweyns Vicaris Triple Gueuze
-     82  Emelisse Black & Tan Arbeg
-     82  Emelisse Milk Stout
-     81  Harpoon UFO Raspberry
-     81  Smisje Wostyntje
-     80  Steigl Lager
-     78  Magic Hat #9
-     78  Yuengling Lager
-     78  Struise XX
-     78  Fruli Strawberry
-     78  Blue Moon White
-     78  Elysian Mortis
-    N/A  Union Rye Baby IPA
-    N/A  CCM Montseny Blat
-    N/A  Oxbow Freestyle 13
-    N/A  Against The Grain Galangal Action
-    N/A  Stillwater Ales Classique
-    N/A  Saint Helene Simcoe Lager
-    N/A  Trois Dames L'Amoureuse Rouge
-    N/A  Thornbridge Beadeca's Well
-    N/A  Achilles De Liter Van Pallieter
-    N/A  Against The Grain Shit Jeans
-    N/A  Mikkeller Yeast Series 2.0 Brett Lambicus
-    N/A  Mikkeller Yeast Series 2.0 Brett Bruxellensis
-    N/A  Burley Oak Rude Girl
-    N/A  Maine Peeper
-    N/A  Malmgard Belge
-    N/A  Het Nest Schuppenboer
-    N/A  Struise XXXX Quad
-    N/A  Against The Grain 2 Wheel Death Machine
-    N/A  Struise XXX Rye Triple
-    N/A  Trois Dames L'Amoureuse Blanche
-    N/A  Burley Oak Hopless Beach
-    N/A  Pub Dog Sour Cherry Porter
+ 
+```
+ 97  Firestone Walker Double Jack
+ 95  Allagash Curieux
+ 95  Great Divide Espresso oak Aged Yeti
+ 93  Oxbow Farmhouse pale
+ 93  Allagash White
+ 93  Sierra Nevada Bigfoot
+ 93  Thornbridge Bracia
+ 93  Bahnof Berliner Weisse w/ Brett
+ 92  Blaugies La Moneuse 
+ 92  Struise Rio Reserva 2008
+ 92  Boulevard Grainstorm
+ 92  Delirium Tremens
+ 92  Stillwater Ales As Follows
+ 92  Smuttynose IPA
+ 92  Carengie Stark Porter
+ 92  Chimay Cinq Cents
+ 91  Rodenbach Classic
+ 91  Sierra Nevada Kellerweiss
+ 91  Harpoon Leviathan Imperial IPA
+ 91  Victory Prima Pils
+ 91  Franziskaner Hefeweizen
+ 91  De Dolle Arabier
+ 91  Heavy Seas Loose Cannon
+ 90  The Bruery Saison De Lente
+ 90  Oskar Blues oSKAr G'Rauch
+ 90  Van Eecke Popering Hommel
+ 90  Mission Dark Seas
+ 90  Sixpoints Resin
+ 90  Scheldebrouwerij Hop Ruiter
+ 89  Boulevard 80 Acre
+ 89  Flying Dog Double Dog (Nitro)
+ 89  Stillwater Stateside Saison
+ 89  Evil Twin Femme Fatale Brett
+ 89  Sierra Nevada Ovila Quad w/ Plums
+ 88  Olivers 20th Anniversary
+ 88  Sierra Nevada Ruthless Rye IPA
+ 88  Lindemans Framboise
+ 88  Maine Mean Old Tom (Nitro)
+ 88  DuClaw Sweet baby Jesus
+ 88  Terrapin Rye Squared
+ 87  De Glazen Toren Canaster
+ 87  La Rulles Estivale
+ 87  Terrapin Barley Ryne
+ 87  Brewers Art Resurrection
+ 87  Contreras Valeir Extra
+ 87  La Rulles Cuvee Meilleurs Voeux
+ 87  Union Duckpin Pale Ale
+ 86  Oxbow Space Cowboy
+ 86  Harpoon Rich & Dan Rye IPA
+ 86  Van Steenberge Klokke Roeland
+ 86  Burley Oak Aboriginal Gangster
+ 86  Scheldebrouwerij Lamme Goedzak
+ 86  Heavy Seas Black Cannon
+ 85  New Belgium Rampant
+ 85  New Belgium/Dieu Du Ciel Heavenly Feijoa
+ 85  Fritz Briem Gratzer
+ 85  Burley Oak Rude Boy
+ 84  Van Eecke Cuvee Watou
+ 84  Blue Mountain  Steel Wheels
+ 84  Harpoon Black IPA
+ 84  Alvinne Undressed
+ 84  Terrapin Double Feature
+ 84  Sierra Nevada Blindfold 
+ 84  Hof Ten Dormaal Amber
+ 84  Guinness Stout
+ 84  Jandrain V Cense
+ 84  Cazeau Tournay Black
+ 83  Vapeur Saison De Pipaix
+ 83  New Belgium Shift
+ 83  Crispin Cider
+ 83  Heavy Seas BIG DIPA 
+ 82  New Belgium Fat Tire
+ 82  New Belgium Cascara Quad
+ 82  Harpoon Directors Cut
+ 81  Harpoon UFO Raspberry
+ 80  Steigl Lager
+ 79  Terrapin Tom Foolery
+ 78  Yuengling Lager
+ 78  Fruli Strawberry
+ 78  Blue Moon White
+ 77  Dupont Monks Stout
+ 76  Palm Ale
+N/A  CCM Montseny Blat
+N/A  Dominion Cherry Blossom Lager
+N/A  Elysian Arboreal
+N/A  Terrapin Full of Blarney(Nitro)
+N/A  Het Nest Kleveretien
+N/A  Troubadour Magma Sorachi Ace
+N/A  Thornbridge Beadeca's Well
+N/A  Flying Dog Pumpernickel IPA
+N/A  Stift Gregerious
+N/A  Thornbridge Breadeca's Well
+N/A  Maine Peeper
+N/A  Flying Dog Green Tea Imperial Stout
+```

@@ -72,4 +72,4 @@ for name,data in sorted(beerData.items(), key=getScore, reverse=True):
 # pprint.pprint(beerData)
 
 # write data to disk for next time
-# file('cache.py','w+').write('beers = %s\n' % pprint.pformat(beerData))
+file('cache.py','w+').write('beers = %s\n' % pprint.pformat(beerData))
