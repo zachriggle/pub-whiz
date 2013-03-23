@@ -3,7 +3,7 @@ Maxs
 
 Scraping Max's Taphouse and Cross-Referencing BeerAdvocate!
 
-**Update**: Added functionality for Frisco Taphouse!
+**Update**: Added functionality for Frisco Taphouse and The Ale House in Columbia!!!
 
 I originally wanted to do all of this in a self-contained JS application, but it turns out that Google and Bing don't like you hammering on their servers, and Maxs.com has a restrictive `Access-Control-Allow-Origin` anyhow.  Python seemed like the next best option.
 
@@ -12,6 +12,7 @@ Usage
 
 `python maxs.py`
 `python frisco.py`
+`python alehouse.py`
 
 Example Output
 ====
