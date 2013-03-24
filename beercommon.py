@@ -1,3 +1,5 @@
+import os
+import sys
 import pprint
 from cache import beers as beerData
 
@@ -52,13 +54,25 @@ def SearchForBeers(beerNames):
 
     file('cache.py','w+').write('beers = %s\n' % pprint.pformat(beerData))
 
+def WriteResultJson(beerNames):
+    global beerData
+
+    htmlFile = file(os.path.basename(sys.argv[0]) + '.json')
+
+    j = {'beer': []
+
+    for name,data in sorted(beerData.items(), key=getScore, reverse=True):    
+        if name in beerNames:
+            j['beer'].append(data)
+            println json.dumps(data)
+
+def getScore((a,b)):
+    try:    return int(b['score']) # 0 # return data['score']
+    except: return 101
 
 def DisplayBeers(beerNames):
     global beerData
 
-    def getScore((a,b)):
-        try:    return int(b['score']) # 0 # return data['score']
-        except: return 101
 
     import datetime
     print datetime.datetime.now()
