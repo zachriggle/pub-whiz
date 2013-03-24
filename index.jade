@@ -25,8 +25,8 @@ html(lang='en')
           a.brand(href='#') Zymology
           .nav-collapse.collapse
             p.navbar-text.pull-right
-              | Logged in as
-              a.navbar-link(href='#') Username
+              //- | Logged in as
+              //- a.navbar-link(href='#') Username
             ul.nav
               li.active
                 a(href='#') Home
@@ -36,7 +36,9 @@ html(lang='en')
                 a(href='#contact') Contact
 
     .container-fluid
-      g:layoutBody
+      
+      include content
+
       hr
       footer
         p © Zach Riggle    
