@@ -58,7 +58,7 @@ def DisplayBeers(beerNames):
 
     def getScore((a,b)):
         try:    return int(b['score']) # 0 # return data['score']
-        except: return -1
+        except: return 101
 
     import datetime
     print datetime.datetime.now()
