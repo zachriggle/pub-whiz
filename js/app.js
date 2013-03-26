@@ -64,16 +64,10 @@ App.BarDescriptionController = Ember.ObjectController.extend();
 
 App.BeersController = Ember.ArrayController.extend();
 
-App.register('controller', 'beerItem', App.BeerController);
-
 App.BarController = Ember.ArrayController.extend({
-  itemController: 'beerItem'
 });
 
-App.register('controller', 'barItem', App.BarController);
-
 App.BarsController = Ember.ArrayController.extend({
-  itemController: 'barItem',
   beers: (function() {
     return Ember.ArrayProxy.createWithMixins(Ember.SortableMixin, {
       sortProperties: ['rating'],
