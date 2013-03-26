@@ -1,3 +1,6 @@
+import urllib2
+import json
+import re
 import os
 import sys
 import pprint
@@ -34,7 +37,7 @@ def SearchForBeers(beerNames):
             continue
 
         results = search(beer + searchQuery)
-        data = { 'score': 'N/A', 'result': '' }
+        data = { 'score': 'N/A', 'result': '', 'id': 1 + len(beerData) }
         
         for result in results:
 
@@ -48,24 +51,13 @@ def SearchForBeers(beerNames):
             if matches:
                 data['result'] = result
                 data['score']  = matches.group('score')
-                data['id']     = 1 + len(beerData)
                 break # Stop after the first (best) result
 
         beerData[beer] = data
 
     file('cache.py','w+').write('beers = %s\n' % pprint.pformat(beerData))
 
-def WriteResultJson(beerNames):
-    global beerData
 
-    htmlFile = file(os.path.basename(sys.argv[0]) + '.json')
-
-    j = {'beer': []
-
-    for name,data in sorted(beerData.items(), key=getScore, reverse=True):    
-        if name in beerNames:
-            j['beer'].append(data)
-            println json.dumps(data)
 
 def getScore((a,b)):
     try:    return int(b['score']) # 0 # return data['score']
@@ -83,9 +75,57 @@ def DisplayBeers(beerNames):
             print "%3s " % data['score'],
             print name
 
-def DumpBarToFixtures(filename, barData):
+def WriteResultJson(beerNames):
     global beerData
 
+    htmlFile = file(os.path.basename(sys.argv[0]) + '.json')
+
+    j = {'beer': []}
+
+    for name,data in sorted(beerData.items(), key=getScore, reverse=True):    
+        if name in beerNames:
+            j['beer'].append(data)
+            print json.dumps(data)
+
+def DumpBeerToFixtures():
+    global beerData
+
+    beers = []
+
+    for k,v in beerData.items():
+        score = v['score']
+        url   = ""
+
+        try:    score = int(score)
+        except: pass
+
+        try:    url = v['result']['Url']
+        except: url = "http://google.com/?q=%s" % k
+
+        beers.append({
+            'name': k,
+            'id':   v['id'],
+            'score': score,
+            'url': url
+        })
+
+    file('beer.js','w+').write("""
+App.Beer.FIXTURES = %s
+""" % json.dumps(beers))
+
+def DumpBarToFixtures(filename, beerNames, barData):
+    global beerData
+
+    for k,v in beerData.items():
+        print k
+        print "%d %s" % (v['id'], k)
+
+    barData['beers'] = [beerData[name]["id"] for name in beerNames]
+
     file(filename,'w+').write("""
-App.Bar.createRecord(%s).store.commit()
-"""
+$(function () {
+App.Bar.FIXTURES.push(%s);
+})
+""" % json.dumps(barData))
+
+    DumpBeerToFixtures()
