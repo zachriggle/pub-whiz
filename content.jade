@@ -1,48 +1,72 @@
 #app.container-fluid
   script(type='text/x-handlebars', data-template-name="application")
+    {{outlet}}
+  script(type='text/x-handlebars', data-template-name="bars/index")
     .hero-unit
-      h1 Welcome, beer drinkers!
+      h1 Hello, wise beer drinkers!
       p
-      | This is a simple website designed to make your craft beer choices easier
-      | when you are drinking in the Baltimore / Columbia area.
-    
+      | Pub Whiz helps you make informed craft beer choices 
+      | when you are out at the pub.
     {{ outlet }}
-  script(type='text/x-handlebars', data-template-name="bars")
+  script(type='text/x-handlebars', data-template-name="bars") 
+    .navbar
+      .navbar-inner
+        .container
+          ul.nav
+            // | {{#linkTo "index" tagName="li"}}
+            // |   <a {{bindAttr href="view.href"}}>Home</a>
+            // | {{/linkTo}}
+            | {{#each bar in controller}}
+            |   {{#linkTo "bar" bar tagName="li"}}
+            |     <a {{bindAttr href="view.href"}}>{{bar.name}}</a>
+            |   {{/linkTo}}
+            | {{/each}}
+    {{outlet}}
+  script(type='text/x-handlebars', data-template-name="bar")
     .row-fluid
-      | {{#each bar in controller}}
-      .span4
-        |  {{partial "bar_description"}}
-        |  {{partial "bar_links"}}
-        |  {{partial "bar_beers"}}
-      | {{/each}}
-  script(type='text/x-handlebars', data-template-name="bar")    
-    b Wooo -- {{controller}}
-  script(type='text/x-handlebars', data-template-name="_bar_description")
-    h2
-      | <a {{bindAttr href="bar.url"}}> {{bar.name}} </a>
-    p {{bar.description}}
-  script(type='text/x-handlebars', data-template-name="_bar_links")
-    p
-      .pull-left
+      div.page-header 
+        h1 {{name}}
+        h1 
+          small {{description}}
+      p {{details}}
+      p.pull-right
         i.icon-home
-        | &nbsp; Website
-      .pull-right
-        | {{#view App.LinkView href="bar.url"}}
+        | &nbsp; 
+        | <a {{bindAttr href="url"}}>Website</a>
+        | &nbsp; &nbsp; &nbsp; 
         i.icon-map-marker
-        | &nbsp; Directions
-        | {{/view}}
-
-  script(type='text/x-handlebars', data-template-name="_bar_beers")
-    table.table
-      | {{#each beer in bar.beers}}
-      tr
-        td {{#with beer}} {{partial "beer"}} {{/with}}
+        | &nbsp;
+        | <a {{bindAttr href="map"}}>Directions</a>
+    .row-fluid
+      table.table    
+        thead
+          th
+            .text-center
+              img(src="/img/ba.ico")
+          th
+            .text-center 
+              img(src="/img/ratebeer.ico")
+          th Name
+          th Style
+          th Description
+        | {{#each beer in sortedBeers}}
+        tr
+          td
+            .text-center
+              span(data-toggle="popover", data-title="TItle", data-content="BeerAdvocate score")
+              | {{beer.score}}
+          td
+            .text-center 0
+          td
+            span(data-toggle="popover", data-title="TItle", data-content="Contents")
+            | <a {{bindAttr href="beer.url"}}>{{beer.name}}</a>
+          td {{beer.description}}
+          td {{beer.style}}
+        | {{/each}} 
+  script(type='text/x-handlebars', data-template-name="baXXX")
+    .row-fluid
+      | {{#each beer in beers}}
+      | {{beer.name}}
       | {{/each}}
-  script(type='text/x-handlebars', data-template-name="beers")
-    p A list of beer
-  script(type='text/x-handlebars', data-template-name="_beer")
-    span(data-toggle="popover", data-title="Title", data-content="Contents")
-      .pull-left {{score}}
-      .pull-right <a {{bindAttr href="url"}}> {{name}}</a>
-  script(type='text/x-handlebars', data-template-name="about")
-    p Created by Zach Riggle
+  script(type='text/x-handlebars', data-template-name="beer")
+    .row-fluid BEER

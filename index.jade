@@ -2,62 +2,15 @@
 html(lang='en')
   head
     meta(charset='utf-8')
-    title Good Beer
+    title Pub Whiz
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
     meta(name='description', content='')
     meta(name='author', content='')
 
+    link(href='/css/normalize.css', rel='stylesheet')
     link(href='/css/bootstrap.css', rel='stylesheet')
     link(href='/css/bootstrap-responsive.css', rel='stylesheet')
-
-    style(type='text/css')
-      html,
-      body {
-        height: 100%;
-        /* The html and body elements cannot have any padding or margin. */
-      }
-
-      /* Wrapper for page content to push down footer */
-      #wrap {
-        min-height: 100%;
-        height: auto !important;
-        height: 100%;
-        /* Negative indent footer by it's height */
-        margin: 0 auto -60px;
-      }
-
-      /* Set the fixed height of the footer here */
-      #push,
-      #footer {
-        height: 60px;
-      }
-      #footer {
-        background-color: #f5f5f5;
-      }
-
-      /* Lastly, apply responsive CSS fixes as necessary */
-      @media (max-width: 767px) {
-        #footer {
-          margin-left: -20px;
-          margin-right: -20px;
-          padding-left: 20px;
-          padding-right: 20px;
-        }
-      }
-
-      #wrap > .container-fluid { 
-        padding-top: 60px;
-      }
-
-      .container-fluid .credit {
-        margin: 20px 0;
-      }
-
-      .container-fluid {
-        margin-right: auto;
-        margin-left: auto;
-        max-width: 950px; /* or 950px */
-      }
+    link(href='/css/style.css', rel='stylesheet')
 
     link(rel='shortcut icon', href='ico/favicon.ico')
     link(rel='apple-touch-icon-precomposed', sizes='144x144', href='ico/apple-touch-icon-144-precomposed.png')
@@ -66,27 +19,9 @@ html(lang='en')
     link(rel='apple-touch-icon-precomposed', href='ico/apple-touch-icon-57-precomposed.png')
   body
     #wrap
-      .navbar.navbar-inverse.navbar-fixed-top
-        .navbar-inner
-          .container-fluid
-            button.btn.btn-navbar(type='button', data-toggle='collapse', data-target='.nav-collapse')
-              span.icon-bar
-              span.icon-bar
-              span.icon-bar
-            a.brand(href='#') Good Beer
-            .nav-collapse.collapse
-              p.navbar-text.pull-right
-                | Logged in as
-                a.navbar-link(href='#') Username
-              ul.nav
-                li.active
-                  a(href='#') Home
-                li
-                  a(href='#about') About
-                li
-                  a(href='#contact') Contact
-
-      .container-fluid
+      .container
+        .masthead
+          h3.muted Pub Whiz
         include content
       #push
     #footer
