@@ -1,1 +1,48 @@
-p Hello, world
+#app.container-fluid
+  script(type='text/x-handlebars', data-template-name="application")
+    .hero-unit
+      h1 Welcome, beer drinkers!
+      p
+      | This is a simple website designed to make your craft beer choices easier
+      | when you are drinking in the Baltimore / Columbia area.
+    
+    {{ outlet }}
+  script(type='text/x-handlebars', data-template-name="bars")
+    .row-fluid
+      | {{#each bar in controller}}
+      .span4
+        |  {{partial "bar_description"}}
+        |  {{partial "bar_links"}}
+        |  {{partial "bar_beers"}}
+      | {{/each}}
+  script(type='text/x-handlebars', data-template-name="bar")    
+    b Wooo -- {{controller}}
+  script(type='text/x-handlebars', data-template-name="_bar_description")
+    h2
+      | <a {{bindAttr href="bar.url"}}> {{bar.name}} </a>
+    p {{bar.description}}
+  script(type='text/x-handlebars', data-template-name="_bar_links")
+    p
+      .pull-left
+        i.icon-home
+        | &nbsp; Website
+      .pull-right
+        | {{#view App.LinkView href="bar.url"}}
+        i.icon-map-marker
+        | &nbsp; Directions
+        | {{/view}}
+
+  script(type='text/x-handlebars', data-template-name="_bar_beers")
+    table.table
+      | {{#each beer in bar.beers}}
+      tr
+        td {{#with beer}} {{partial "beer"}} {{/with}}
+      | {{/each}}
+  script(type='text/x-handlebars', data-template-name="beers")
+    p A list of beer
+  script(type='text/x-handlebars', data-template-name="_beer")
+    span(data-toggle="popover", data-title="Title", data-content="Contents")
+      .pull-left {{score}}
+      .pull-right <a {{bindAttr href="url"}}> {{name}}</a>
+  script(type='text/x-handlebars', data-template-name="about")
+    p Created by Zach Riggle

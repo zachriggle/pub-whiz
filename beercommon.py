@@ -47,7 +47,8 @@ def SearchForBeers(beerNames):
             matches     = re.search(scorePattern, description)
             if matches:
                 data['result'] = result
-                data['score'] = matches.group('score')
+                data['score']  = matches.group('score')
+                data['id']     = 1 + len(beerData)
                 break # Stop after the first (best) result
 
         beerData[beer] = data
@@ -81,3 +82,10 @@ def DisplayBeers(beerNames):
         if name in beerNames:
             print "%3s " % data['score'],
             print name
+
+def DumpBarToFixtures(filename, barData):
+    global beerData
+
+    file(filename,'w+').write("""
+App.Bar.createRecord(%s).store.commit()
+"""
