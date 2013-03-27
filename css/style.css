@@ -32,7 +32,7 @@ body {
   }
 }
 
-#wrap > .container-fluid { 
+#app-main {
   padding-top: 60px;
 }
 

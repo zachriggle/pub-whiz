@@ -1,32 +1,30 @@
-Ember.ENV.EXPERIMENTAL_CONTROL_HELPER = true;
-Ember.LOG_BINDINGS = true;
-Ember.ENV.RAISE_ON_DEPRECATION = true
-Ember.LOG_STACKTRACE_ON_DEPRECATION = true
+// Ember.ENV.EXPERIMENTAL_CONTROL_HELPER = true;
+// Ember.LOG_BINDINGS = true;
+// Ember.ENV.RAISE_ON_DEPRECATION = true
+// Ember.LOG_STACKTRACE_ON_DEPRECATION = true
 
 window.App = Ember.Application.create({
-    rootElement: '#wrap',
-    LOG_TRANSITIONS: true
+    rootElement: '#app',
+    // LOG_TRANSITIONS: true
 });
 
 App.Router.map(function() {
-  this.resource('bars', function() {
+  this.resource('bar', function() {
       this.resource('bar', {path:':bar_id'});
   });
 });
 
-App.IndexRoute = Ember.Route.extend({
-    redirect: function() {
-        this.transitionTo('bars'); 
-    }
-});
-
 App.ApplicationRoute = Ember.Route.extend({
+  setupController: function(controller) {
+    this.controllerFor('nav').set('content', App.Bar.find());
+  },  
+  renderTemplate: function() {
+    this.render();
+    this.render("nav", {outlet: "nav", into: "application"})
+  }
 });
 
-App.BarsRoute = Ember.Route.extend({
-    model: function() {
-        return App.Bar.find();
-    }
+App.NavController = Ember.ArrayController.extend({
 });
 
 App.BarRoute = Ember.Route.extend({
@@ -34,8 +32,6 @@ App.BarRoute = Ember.Route.extend({
         return App.Bar.find(params.bar_id);
     }
 });
-
-App.BarsController = Ember.ArrayController.extend();
 
 App.BarController = Ember.ObjectController.extend({
   sortedBeers: (function () {
@@ -45,12 +41,11 @@ App.BarController = Ember.ObjectController.extend({
       sortAscending: false
     })
   }).property('content.beers')
-})
-
+});
 
 App.Store = DS.Store.extend({
-      revision: 12,
-      adapter: DS.FixtureAdapter.create()
+  revision: 12,
+  adapter: DS.FixtureAdapter.create()
 });
 
 App.Beer = DS.Model.extend({
@@ -69,35 +64,7 @@ App.Bar = DS.Model.extend({
   map:   DS.attr('string')
 });
 
-// App.Beer.FIXTURES = [{
-//   id: 1,
-//   name: "Pliny the Younger",
-//   score: 100,
-//   url: "#",
-//   bar: 1
-// }, {
-//   id: 2,
-//   name: "Pliny the Elder",
-//   score: 20,
-//   url: "#",
-//   bar: 1
-// }, {
-//   id: 3,
-//   name: "Hopslam",
-//   score: 30,
-//   url: "#"
-// }, {
-//   id: 4,
-//   name: "KBS",
-//   score: 97,
-//   url: "http://google.com"
-// }, {
-//   id: 5,
-//   name: "CBS",
-//   score: "???",
-//   url: "http://google.com"
-// }]
-
+App.Beer.FIXTURES = []
 App.Bar.FIXTURES = []
 
 $(function () {
