@@ -19,15 +19,34 @@ html(lang='en')
     link(rel='apple-touch-icon-precomposed', href='ico/apple-touch-icon-57-precomposed.png')
   body
     #wrap
+      .navbar.navbar-fixed-top
+        .navbar-inner
+          .container
+            button.btn.btn-navbar(type='button', data-toggle='collapse', data-target='.nav-collapse')
+              span.icon-bar
+              span.icon-bar
+              span.icon-bar
+            a.brand(href='#') Project name
+            .nav-collapse.collapse
+              ul.nav
+                li.active
+                  a(href='#') Home
+                li
+                  a(href='#about') About
+                li
+                  a(href='#contact') Contact
       .container
         .masthead
           h3.muted Pub Whiz
-        include content
+        #app.container-fluid
+          script(type='text/x-handlebars', data-template-name="application")
+            {{outlet}}
       #push
     #footer
       .container-fluid
         p.muted.credit Created by 
           a(href='https://github.com/zachriggle') Zach Riggle
+    include content
     script
       ENV = { EXPERIMENTAL_CONTROL_HELPER: true }
     script(src='js/jquery-1.9.1.js')

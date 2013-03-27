@@ -1,75 +1,72 @@
-#app.container-fluid
-  script(type='text/x-handlebars', data-template-name="application")
-    {{outlet}}
-  script(type='text/x-handlebars', data-template-name="bars/index")
-    .hero-unit
-      h1 Hello, wise beer drinkers!
-      p
-      | Pub Whiz helps you make informed craft beer choices 
-      | when you are out at the pub.
-      p 
-      | Select a bar from the top to see the beers that are currently on tap,
-      | as well as their ratings from BeerAdvocate and RateBeer.
-    {{ outlet }}
-  script(type='text/x-handlebars', data-template-name="bars") 
-    .navbar
-      .navbar-inner
-        .container
-          ul.nav
-            // | {{#linkTo "index" tagName="li"}}
-            // |   <a {{bindAttr href="view.href"}}>Home</a>
-            // | {{/linkTo}}
-            | {{#each bar in controller}}
-            |   {{#linkTo "bar" bar tagName="li"}}
-            |     <a {{bindAttr href="view.href"}}>{{bar.name}}</a>
-            |   {{/linkTo}}
-            | {{/each}}
-    {{outlet}}
-  script(type='text/x-handlebars', data-template-name="bar")
-    .row-fluid
-      div.page-header 
-        h1 {{name}}
-        h1 
-          small {{description}}
-      p {{details}}
-      p.pull-right
-        i.icon-home
-        | &nbsp; 
-        | <a {{bindAttr href="url"}}>Website</a>
-        | &nbsp; &nbsp; &nbsp; 
-        i.icon-map-marker
-        | &nbsp;
-        | <a {{bindAttr href="map"}}>Directions</a>
-    .row-fluid
-      table.table    
-        thead
-          th
-            .text-center
-              img(src="img/ba.ico")
-          th
-            .text-center 
-              img(src="img/ratebeer.ico")
-          th Name
-          th Style
-          th Description
-        | {{#each beer in sortedBeers}}
-        tr
-          td
-            .text-center
-              span(data-toggle="popover", data-title="TItle", data-content="BeerAdvocate score")
-              | {{beer.score}}
-          td
-            .text-center 0
-          td
-            span(data-toggle="popover", data-title="TItle", data-content="Contents")
-            | <a {{bindAttr href="beer.url"}}>{{beer.name}}</a>
-          td {{beer.description}}
-          td {{beer.style}}
-        | {{/each}} 
-  script(type='text/x-handlebars', data-template-name="baXXX")
-    .row-fluid
-      | {{#each beer in beers}}
-      | {{beer.name}}
-      | {{/each}}
-  script(type='text/x-handlebars', data-template-name="beer")
-    .row-fluid BEER
+script(type='text/x-handlebars', data-template-name="bars/index")
+  .hero-unit
+    h1 Hello, wise beer drinkers!
+    p
+    | Pub Whiz helps you make informed craft beer choices 
+    | when you are out at the pub.
+    p 
+    | Select a bar from the top to see the beers that are currently on tap,
+    | as well as their ratings from BeerAdvocate and RateBeer.
+  {{ outlet }}
+script(type='text/x-handlebars', data-template-name="bars") 
+  .navbar
+    .navbar-inner
+      .container
+        ul.nav
+          // | {{#linkTo "index" tagName="li"}}
+          // |   <a {{bindAttr href="view.href"}}>Home</a>
+          // | {{/linkTo}}
+          | {{#each bar in controller}}
+          |   {{#linkTo "bar" bar tagName="li"}}
+          |     <a {{bindAttr href="view.href"}}>{{bar.name}}</a>
+          |   {{/linkTo}}
+          | {{/each}}
+  {{outlet}}
+script(type='text/x-handlebars', data-template-name="bar")
+  .row-fluid
+    div.page-header 
+      h1 {{name}}
+      h1 
+        small {{description}}
+    p {{details}}
+    p.pull-right
+      i.icon-home
+      | &nbsp; 
+      | <a {{bindAttr href="url"}}>Website</a>
+      | &nbsp; &nbsp; &nbsp; 
+      i.icon-map-marker
+      | &nbsp;
+      | <a {{bindAttr href="map"}}>Directions</a>
+  .row-fluid
+    table.table    
+      thead
+        th
+          .text-center
+            img(src="img/ba.ico")
+        th
+          .text-center 
+            img(src="img/ratebeer.ico")
+        th Name
+        th Style
+        th Description
+      | {{#each beer in sortedBeers}}
+      tr
+        td
+          .text-center
+            span(data-toggle="popover", data-title="TItle", data-content="BeerAdvocate score")
+            | {{beer.score}}
+        td
+          .text-center 0
+        td
+          span(data-toggle="popover", data-title="TItle", data-content="Contents")
+          | <a {{bindAttr href="beer.url"}}>{{beer.name}}</a>
+        td {{beer.description}}
+        td {{beer.style}}
+      | {{/each}} 
+script(type='text/x-handlebars', data-template-name="baXXX")
+  .row-fluid
+    | {{#each beer in beers}}
+    | {{beer.name}}
+    | {{/each}}
+script(type='text/x-handlebars', data-template-name="beer")
+  .row-fluid BEER
