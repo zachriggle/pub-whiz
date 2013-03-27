@@ -24,14 +24,26 @@ App.ApplicationRoute = Ember.Route.extend({
   }
 });
 
-App.NavController = Ember.ArrayController.extend({
-});
-
 App.BarRoute = Ember.Route.extend({
     model: function(params) {
         return App.Bar.find(params.bar_id);
     }
 });
+
+App.ApplicationController = Ember.Controller.extend({
+  routeChanged: (function() {
+    if (!window._gaq) {
+      return;
+    }
+    return Em.run.next(function() {
+      _gaq.push(['_trackPageview']);
+    });
+  }).observes('currentPath')
+})
+
+App.NavController = Ember.ArrayController.extend({
+});
+
 
 App.BarController = Ember.ObjectController.extend({
   sortedBeers: (function () {
