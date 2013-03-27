@@ -32,9 +32,13 @@ body {
   }
 }
 
-#app-main {
-  padding-top: 60px;
+@media (min-width: 980px) {
+  #app-main {
+    padding-top: 60px;
+  }
 }
+
+
 
 .container-fluid .credit {
   margin: 20px 0;
