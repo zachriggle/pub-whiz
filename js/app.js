@@ -4,7 +4,7 @@ Ember.ENV.RAISE_ON_DEPRECATION = true
 Ember.LOG_STACKTRACE_ON_DEPRECATION = true
 
 window.App = Ember.Application.create({
-    rootElement: '#app',
+    rootElement: '#wrap',
     LOG_TRANSITIONS: true
 });
 

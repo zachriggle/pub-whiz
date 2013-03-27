@@ -19,6 +19,12 @@ html(lang='en')
     link(rel='apple-touch-icon-precomposed', href='ico/apple-touch-icon-57-precomposed.png')
   body
     #wrap
+    #footer
+      .container-fluid
+        p.muted.credit Created by 
+          a(href='https://github.com/zachriggle') Zach Riggle
+    include content
+    script(type='text/x-handlebars', data-template-name="application")
       .navbar.navbar-fixed-top
         .navbar-inner
           .container
@@ -38,15 +44,9 @@ html(lang='en')
       .container
         .masthead
           h3.muted Pub Whiz
-        #app.container-fluid
-          script(type='text/x-handlebars', data-template-name="application")
+          .container-fluid
             {{outlet}}
       #push
-    #footer
-      .container-fluid
-        p.muted.credit Created by 
-          a(href='https://github.com/zachriggle') Zach Riggle
-    include content
     script
       ENV = { EXPERIMENTAL_CONTROL_HELPER: true }
     script(src='js/jquery-1.9.1.js')
