@@ -32,9 +32,13 @@ body {
   }
 }
 
-#wrap > .container-fluid { 
-  padding-top: 60px;
+@media (min-width: 980px) {
+  #app-main {
+    padding-top: 60px;
+  }
 }
+
+
 
 .container-fluid .credit {
   margin: 20px 0;
@@ -44,4 +48,8 @@ body {
   margin-right: auto;
   margin-left: auto;
   max-width: 950px; /* or 950px */
+}
+
+.ellipsis {
+  text-overflow: ellipsis;
 }

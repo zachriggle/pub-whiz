@@ -12129,7 +12129,6 @@ Ember.SortableMixin = Ember.Mixin.create(Ember.MutableEnumerable, {
   sortAscending: true,
 
   orderBy: function(item1, item2) {
-    console.log('orderyBy')
     var result = 0,
         sortProperties = get(this, 'sortProperties'),
         sortAscending = get(this, 'sortAscending');

@@ -4,11 +4,25 @@ import re
 import os
 import sys
 import pprint
+import HTMLParser
+import multiprocessing
+from bs4 import BeautifulSoup
+
 from cache import beers as beerData
 
-urlPattern   =r'http://beeradvocate.com/beer/profile/\d+/\d+(\?.*)?'
-scorePattern =r'(?P<score>(\d+|N/A)) out of 100'
-searchQuery  = ' "out of 100 based on" site:beeradvocate.com'
+baUrlPattern   =r'http://beeradvocate.com/beer/profile/\d+/\d+(\?.*)?'
+baScorePattern =r'(?P<score>(\d+|N/A)) out of 100'
+baQuery      = ' "out of 100 based on" site:beeradvocate.com'
+
+rbQuery      = ' site:ratebeer.com'
+rbStylePattern = r'!Style: !(?P<style>[^!]+)'
+rbAbvPattern   = r'!ABV!: !(?P<abv>[\.\d]+%)!'
+rbDescPattern  = r'!COMMERCIAL DESCRIPTION!(?P<description>[^!]+)'
+rbScorePattern = r'(?P<score>\d+) at RateBeer!'
+rbAliasPattern = r'Proceed to the aliased beer...<br><br><A HREF="(?P<url>[^"]+)'
+
+def unescape(text):
+    return unicode(BeautifulSoup(text))
 
 def search(query):
     user_agent = 'Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; Trident/4.0; FDM; .NET CLR 2.0.50727; InfoPath.2; .NET CLR 1.1.4322)'
@@ -28,64 +42,97 @@ def search(query):
 
     return json.loads(data)['d']['results']
 
-def SearchForBeers(beerNames):
-    global beerData
+def SearchForBeer(beer):
+    # cached?
+    if beer in beerData: 
+        return beerData[beer]
 
-    for beer in beerNames:
-        # cached?
-        if beer in beerData: 
+    print beer
+
+    data = { 
+        'name': beer,
+        'result': '', 
+        'baUrl': "http://google.com/?q=%s" % beer,
+        'rbUrl': "http://google.com/?q=%s" % beer,
+        'baScore': '??',
+        'rbScore': '??',
+        'style': "",
+        'abv': "",
+        'description': ""
+    }
+
+    #
+    # Search for BeerAdvocate
+    #
+    results = search(beer + baQuery)
+    
+    for result in results:
+
+        # only care about results that look like:
+        # beeradvocate.com/beer/profile/15237/58905
+        if not re.match(baUrlPattern, result['Url']):
             continue
 
-        results = search(beer + searchQuery)
-        data = { 'score': 'N/A', 'result': '', 'id': 1 + len(beerData) }
-        
-        for result in results:
+        description = result['Description']
+        matches     = re.search(baScorePattern, description)
+        if matches:
+            data['result'] = result
+            data['baScore']  = matches.group('score')
+            data['baUrl']  = result['Url']
+            break # Stop after the first (best) result
 
-            # only care about results that look like:
-            # beeradvocate.com/beer/profile/15237/58905
-            if not re.match(urlPattern, result['Url']):
-                continue
+    #
+    # Search for RateBeer
+    #
+    results = search(beer + rbQuery)
 
-            description = result['Description']
-            matches     = re.search(scorePattern, description)
-            if matches:
-                data['result'] = result
-                data['score']  = matches.group('score')
-                break # Stop after the first (best) result
+    if len(results):
+        r = results[0]
 
-        beerData[beer] = data
+        data['rbUrl'] = r['Url']
+
+        #
+        # Parse the RateBeer page for ABV and Style
+        #
+        html = urllib2.urlopen(r['Url']).read()
+
+        #  Aliased beer?
+        alias = re.search(rbAliasPattern,html)
+        if alias:
+            html = urllib2.urlopen('http://ratebeer.com/' + alias.group('url')).read()
+
+        text = BeautifulSoup(html).get_text('!').encode('utf-8')
+
+        try:    data['rbScore'] = re.search(rbScorePattern, text).group('score')
+        except: pass
+
+        try:    data['style'] = unescape(re.search(rbStylePattern, text).group('style'))
+        except: pass
+
+        try: data['abv']   = re.search(rbAbvPattern, text).group('abv')
+        except: pass     
+
+        try:    data['description'] = unescape(re.search(rbDescPattern, text).group('description'))
+        except: pass
+
+    if data['baScore'] == 'N/A':
+        data['baScore'] = '??'
+
+    return data
+
+def SearchForBeers(beerNames):
+    global beerData
+    pool = multiprocessing.Pool()
+
+    results = pool.map(SearchForBeer, beerNames)
+
+    for result in results:
+        if result['name'] not in beerData.keys():
+            result['id'] =  1 + len(beerData)
+            beerData[result['name']] = result
 
     file('cache.py','w+').write('beers = %s\n' % pprint.pformat(beerData))
 
-
-
-def getScore((a,b)):
-    try:    return int(b['score']) # 0 # return data['score']
-    except: return 101
-
-def DisplayBeers(beerNames):
-    global beerData
-
-
-    import datetime
-    print datetime.datetime.now()
-
-    for name,data in sorted(beerData.items(), key=getScore, reverse=True):
-        if name in beerNames:
-            print "%3s " % data['score'],
-            print name
-
-def WriteResultJson(beerNames):
-    global beerData
-
-    htmlFile = file(os.path.basename(sys.argv[0]) + '.json')
-
-    j = {'beer': []}
-
-    for name,data in sorted(beerData.items(), key=getScore, reverse=True):    
-        if name in beerNames:
-            j['beer'].append(data)
-            print json.dumps(data)
 
 def DumpBeerToFixtures():
     global beerData
@@ -93,21 +140,10 @@ def DumpBeerToFixtures():
     beers = []
 
     for k,v in beerData.items():
-        score = v['score']
-        url   = ""
 
-        try:    score = int(score)
-        except: pass
-
-        try:    url = v['result']['Url']
-        except: url = "http://google.com/?q=%s" % k
-
-        beers.append({
-            'name': k,
-            'id':   v['id'],
-            'score': score,
-            'url': url
-        })
+        data = dict(v)
+        del data['result']
+        beers.append(data)
 
     file('beer.js','w+').write("""
 App.Beer.FIXTURES = %s
