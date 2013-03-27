@@ -1,6 +1,6 @@
 import urllib2
 from bs4 import BeautifulSoup
-from beercommon import SearchForBeers, DisplayBeers, DumpBarToFixtures
+from beercommon import SearchForBeers, DumpBarToFixtures
 
 data = urllib2.urlopen("http://maxs.com").read()
 soup = BeautifulSoup(data)
@@ -9,7 +9,6 @@ beersNamesUnicode = [i.contents[0]     for i in soup.find(id='p7tpc1_1').findAll
 beerNames         = [i.encode('utf-8') for i in beersNamesUnicode]
 
 results = SearchForBeers(beerNames)
-DisplayBeers(beerNames)
 
 DumpBarToFixtures("maxs_taphouse.js", beerNames, {
   'id': 1,

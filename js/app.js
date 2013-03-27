@@ -46,13 +46,24 @@ App.NavController = Ember.ArrayController.extend({
 
 
 App.BarController = Ember.ObjectController.extend({
+  sortProperties: ['baScore'],
+  sortAscending:  false,
+
   sortedBeers: (function () {
     return Ember.ArrayProxy.createWithMixins(Ember.SortableMixin, {
-      sortProperties: ['score'],
+      sortProperties: this.get('sortProperties'),
       content: this.get('content.beers'),
-      sortAscending: false
+      sortAscending: this.get('sortAscending')
     })
-  }).property('content.beers')
+  }).property('content.beers', 'sortAscending', 'sortProperties'),
+  changeSort: function(arg) {
+    if(arg === this.get('sortProperties')[0]) {
+      this.set('sortAscending', !this.get('sortAscending'))
+    } else {
+      this.set('sortProperties', [arg])
+    }
+
+  }
 });
 
 App.Store = DS.Store.extend({
@@ -62,8 +73,17 @@ App.Store = DS.Store.extend({
 
 App.Beer = DS.Model.extend({
   name:  DS.attr('string'),
-  score: DS.attr('number'),
-  url:   DS.attr('string'),
+  description: DS.attr('string'),
+
+  baScore: DS.attr('number'),
+  baUrl:   DS.attr('string'),
+
+  rbScore: DS.attr('number'),
+  rbUrl:   DS.attr('string'),
+
+  style:   DS.attr('string'),
+  abv:     DS.attr('string'),
+
   bar:  DS.belongsTo('App.Bar')
 });
 
@@ -85,3 +105,7 @@ $(function () {
       trigger:  'hover'
   });
 });
+
+Handlebars.registerHelper('icon', function(context, options){
+    return new Handlebars.SafeString("<i class='icon-" + context + "'></i>")
+})

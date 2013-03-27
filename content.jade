@@ -28,26 +28,20 @@ script(type='text/x-handlebars', data-template-name="bar")
     table.table    
       thead
         th
-          .text-center
-            img(src="img/ba.ico")
+          .text-center <img src="img/ba.ico" {{action changeSort "baScore"}} />
         th
-          .text-center 
-            img(src="img/ratebeer.ico")
-        th Name
-        th Style
-        th Description
+          .text-center <img src="img/ratebeer.ico" {{action changeSort "rbScore"}} />
+        th <span {{action changeSort "abv"}}> ABV </span>
+        th <span {{action changeSort "name"}}> Name {{icon sort}} </span>
+        th <span {{action changeSort "style"}}> Style</span>
       | {{#each beer in sortedBeers}}
       tr
         td
-          .text-center
-            span(data-toggle="popover", data-title="TItle", data-content="BeerAdvocate score")
-            | {{beer.score}}
+          .text-center <a {{bindAttr href="beer.baUrl"}}> {{beer.baScore}} </a>
         td
-          .text-center 0
-        td
-          span(data-toggle="popover", data-title="TItle", data-content="Contents")
-          | <a {{bindAttr href="beer.url"}}>{{beer.name}}</a>
-        td {{beer.description}}
+          .text-center <a {{bindAttr href="beer.rbUrl"}}> {{beer.rbScore}} </a>
+        td {{beer.abv}}
+        td {{beer.name}}
         td {{beer.style}}
       | {{/each}} 
 script(type='text/x-handlebars', data-template-name="nav")

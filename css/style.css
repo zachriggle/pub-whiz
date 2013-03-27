@@ -49,3 +49,7 @@ body {
   margin-left: auto;
   max-width: 950px; /* or 950px */
 }
+
+.ellipsis {
+  text-overflow: ellipsis;
+}
