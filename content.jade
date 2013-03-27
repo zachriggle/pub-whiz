@@ -3,14 +3,12 @@ script(type='text/x-handlebars', data-template-name="application")
   #app-main.container
     {{outlet}}
 script(type='text/x-handlebars', data-template-name="index")
-  .page-header
-    h1 Hello, wise beer drinkers!
-    p.lead
-    | Pub Whiz helps you make informed craft beer choices 
-    | when you are out at the pub.
-    | Select a bar from the top to see the beers that are currently on tap,
-    | as well as their ratings from BeerAdvocate and RateBeer.
-  {{ outlet }}
+  h1 Hello, wise beer drinkers!
+  p.lead
+  | Pub Whiz helps you make informed craft beer choices 
+  | when you are out at the pub.
+  | Select a bar from the top to see the beers that are currently on tap,
+  | as well as their ratings from BeerAdvocate and RateBeer.
 script(type='text/x-handlebars', data-template-name="bar")
   .row-fluid
     div.page-header 
