@@ -14,3 +14,5 @@
     - Upper-right corner search by beer name
 - Filter functionality
    - Show all beers at all places above rating XXX
+- Shorten styles
+- Responsive portrait
