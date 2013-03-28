@@ -53,7 +53,7 @@ beerNames = [
 results = SearchForBeers(beerNames)
 
 DumpBarToFixtures("kloby.js", beerNames, {
-  'id': 4,
+  'id': 5,
   'name': "Kloby's Smokehouse",
   'description': "",
   'deatils': "",
