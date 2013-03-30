@@ -5,6 +5,8 @@ python maxs.py
 python frisco.py 
 python victoria.py
 python alehouse.py
+python klobys.py
+python mahaffeys.py
 jade index.jade
 git add -u
 git commit -m "Updated on $(date)"
