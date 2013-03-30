@@ -33,7 +33,7 @@ script(type='text/x-handlebars', data-template-name="bar")
           .text-center <img src="img/ratebeer.ico" {{action changeSort "rbScore"}} />
         th <span {{action changeSort "abv"}}> ABV </span>
         th <span {{action changeSort "name"}}> Name {{icon sort}} </span>
-        th.hidden-phone <span {{action changeSort "style"}}> Style</span>
+        th <span {{action changeSort "style"}}> Style</span>
       | {{#each beer in sortedBeers}}
       tr
         td
@@ -42,7 +42,7 @@ script(type='text/x-handlebars', data-template-name="bar")
           .text-center {{#if beer.rbScore}} <a {{bindAttr href="beer.rbUrl"}}> {{beer.rbScore}} </a> {{else}} ? {{/if}}
         td {{#if beer.abv}} {{beer.abv}}% {{else}} ? {{/if}}
         td {{beer.name}}
-        td.ellipsis {{beer.style}}
+        td {{beer.style}}
       | {{/each}} 
 script(type='text/x-handlebars', data-template-name="nav")
   .navbar.navbar-fixed-top

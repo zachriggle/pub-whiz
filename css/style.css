@@ -53,3 +53,10 @@ body {
 .ellipsis {
   text-overflow: ellipsis;
 }
+
+td {
+  overflow: hidden;
+  max-width: 200px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
