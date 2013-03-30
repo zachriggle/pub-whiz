@@ -184,7 +184,6 @@ def DumpBeerToFixtures():
         del data['result']
         beers.append(data)
 
-    print beers
     
     file('beer.js','w+').write("""
 App.Beer.FIXTURES = %s
