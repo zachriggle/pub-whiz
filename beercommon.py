@@ -120,7 +120,8 @@ def SearchForBeer(beer):
 
         try:     
             name = re.search(rbNamePattern, html).group('name')
-            if(name) data['name'] = unescape(name)
+            if(name):
+                data['name'] = unescape(name)
         except Exception, e: 
             print e
 
