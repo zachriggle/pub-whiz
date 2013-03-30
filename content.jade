@@ -55,9 +55,6 @@ script(type='text/x-handlebars', data-template-name="nav")
         a.brand(href='#') Pub Whiz
         .nav-collapse.collapse
           ul.nav
-            | {{#linkTo "index" tagName="li"}}
-            |   <a {{bindAttr href="view.href"}}>Home</a>
-            | {{/linkTo}}
             | {{#each bar in controller}}
             |   {{#linkTo "bar" bar tagName="li"}}
             |     <a {{bindAttr href="view.href"}}>{{bar.name}}</a>
