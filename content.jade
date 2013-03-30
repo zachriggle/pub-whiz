@@ -52,7 +52,9 @@ script(type='text/x-handlebars', data-template-name="nav")
           span.icon-bar
           span.icon-bar
           span.icon-bar
-        a.brand(href='#') Pub Whiz
+        a.brand(href='#') 
+          object(data="pubwhiz.svg", type="image/svg+xml")
+          | &nbsp; Pub Whiz
         .nav-collapse.collapse
           ul.nav
             | {{#each bar in controller}}
