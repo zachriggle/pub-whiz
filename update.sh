@@ -5,7 +5,7 @@ python maxs.py
 python frisco.py 
 python victoria.py
 python alehouse.py
-jade index.html
+jade index.jade
 git add -u
 git commit -m "Updated on $(date)"
 git push origin master
