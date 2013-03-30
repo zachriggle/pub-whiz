@@ -49,14 +49,3 @@ body {
   margin-left: auto;
   max-width: 950px; /* or 950px */
 }
-
-.ellipsis {
-  text-overflow: ellipsis;
-}
-
-td {
-  overflow: hidden;
-  max-width: 200px;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
