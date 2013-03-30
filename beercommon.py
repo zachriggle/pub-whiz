@@ -112,14 +112,16 @@ def SearchForBeer(beer):
         try:    data['style'] = unescape(re.search(rbStylePattern, text).group('style'))
         except: pass
 
-        try: data['abv']   = re.search(rbAbvPattern, text).group('abv')
+        try:    data['abv']   = re.search(rbAbvPattern, text).group('abv')
         except: pass     
 
         try:    data['description'] = unescape(re.search(rbDescPattern, text).group('description'))
         except: pass
 
-        try:    
-            data['name'] = unescape(re.search(rbNamePattern, html).group('name'))
+        try:     
+            name = re.search(rbNamePattern, html).group('name')
+            if(name):
+                data['name'] = unescape(name)
         except Exception, e: 
             print e
 
