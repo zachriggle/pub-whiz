@@ -49,3 +49,11 @@ body {
   margin-left: auto;
   max-width: 950px; /* or 950px */
 }
+
+
+@media (max-width: 320px) {
+  .hidden-portrait {
+    display: none !important;
+  }
+}
+
