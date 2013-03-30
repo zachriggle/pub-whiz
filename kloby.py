@@ -2,20 +2,6 @@ import urllib2
 from bs4 import BeautifulSoup
 from beercommon import SearchForBeers, DumpBarToFixtures
 
-#
-# VGP is stupid and paginates their beer
-#
-
-
-beersNamesUnicode = []
-
-for page in [1,2,3]:
-  url  = "http://victoriagastropub.com/?menutype=beer&paged=%s" % page
-  data = urllib2.urlopen(url).read()
-  soup = BeautifulSoup(data)
-
-  beersNamesUnicode += soup.findAll('h2', 'menu-title')
-
 beerNames = [
 "Flying Dog - Single Hop Galaxy",
 "Blue Mountain Brewery - Barrel Collection Mandolin",
