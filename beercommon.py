@@ -8,21 +8,25 @@ import HTMLParser
 import multiprocessing
 from bs4 import BeautifulSoup
 
-from cache import beers as beerData
+try:
+    from cache import beers as beerData
+except:
+    beerData = {}
 
 baUrlPattern   =r'http://beeradvocate.com/beer/profile/\d+/\d+(\?.*)?'
 baScorePattern =r'(?P<score>(\d+|N/A)) out of 100'
 baQuery      = ' "out of 100 based on" site:beeradvocate.com'
 
-rbQuery      = ' site:ratebeer.com'
+rbQuery      = ' site:ratebeer.com/beer'
 rbStylePattern = r'!Style: !(?P<style>[^!]+)'
 rbAbvPattern   = r'!ABV!: !(?P<abv>[\.\d]+%)!'
 rbDescPattern  = r'!COMMERCIAL DESCRIPTION!(?P<description>[^!]+)'
 rbScorePattern = r'(?P<score>\d+) at RateBeer!'
 rbAliasPattern = r'Proceed to the aliased beer...<br><br><A HREF="(?P<url>[^"]+)'
+rbNamePattern  = r'<TITLE>(?P<name>.+) - \d+ at RateBeer</TITLE>'
 
 def unescape(text):
-    return unicode(BeautifulSoup(text))
+    return unicode(BeautifulSoup(text)).encode('utf-8')
 
 def search(query):
     user_agent = 'Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; Trident/4.0; FDM; .NET CLR 2.0.50727; InfoPath.2; .NET CLR 1.1.4322)'
@@ -47,10 +51,9 @@ def SearchForBeer(beer):
     if beer in beerData: 
         return beerData[beer]
 
-    print beer
-
     data = { 
         'name': beer,
+        'originalName': beer,
         'result': '', 
         'baUrl': "http://google.com/?q=%s" % beer,
         'rbUrl': "http://google.com/?q=%s" % beer,
@@ -115,9 +118,15 @@ def SearchForBeer(beer):
         try:    data['description'] = unescape(re.search(rbDescPattern, text).group('description'))
         except: pass
 
+        try:    
+            data['name'] = unescape(re.search(rbNamePattern, html).group('name'))
+        except Exception, e: 
+            print e
+
     if data['baScore'] == 'N/A':
         data['baScore'] = '??'
-
+    
+    print data['name']
     return data
 
 def SearchForBeers(beerNames):
@@ -127,9 +136,9 @@ def SearchForBeers(beerNames):
     results = pool.map(SearchForBeer, beerNames)
 
     for result in results:
-        if result['name'] not in beerData.keys():
+        if result['originalName'] not in beerData.keys():
             result['id'] =  1 + len(beerData)
-            beerData[result['name']] = result
+            beerData[result['originalName']] = result
 
     file('cache.py','w+').write('beers = %s\n' % pprint.pformat(beerData))
 
@@ -173,6 +182,8 @@ def DumpBeerToFixtures():
         del data['result']
         beers.append(data)
 
+    print beers
+    
     file('beer.js','w+').write("""
 App.Beer.FIXTURES = %s
 """ % json.dumps(beers))
@@ -181,8 +192,7 @@ def DumpBarToFixtures(filename, beerNames, barData):
     global beerData
 
     for k,v in beerData.items():
-        print k
-        print "%d %s" % (v['id'], k)
+        print "%d %s (%s)" % (v['id'], v['name'], k)
 
     barData['beers'] = [beerData[name]["id"] for name in beerNames]
 
