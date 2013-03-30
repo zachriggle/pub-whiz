@@ -1,7 +1,19 @@
 Maxs
 ====
 
-Scraping Max's Taphouse and Cross-Referencing BeerAdvocate!
+Scraping local bars and Cross-Referencing BeerAdvocate!
+
+Currently Supports:
+
+- Maxs Taphouse
+- Frisco Taphouse
+- The Ale House Columbia
+- Victoria Gastro Pub
+
+Quasi-Supports:
+
+- Kloby's BBQ (requires manual updates due)
+    - The tap list is an image QQ
 
 Requirements
 ====
