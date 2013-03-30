@@ -8,7 +8,10 @@ import HTMLParser
 import multiprocessing
 from bs4 import BeautifulSoup
 
-from cache import beers as beerData
+try:
+    from cache import beers as beerData
+except:
+    beerData = {}
 
 baUrlPattern   =r'http://beeradvocate.com/beer/profile/\d+/\d+(\?.*)?'
 baScorePattern =r'(?P<score>(\d+|N/A)) out of 100'
@@ -20,6 +23,7 @@ rbAbvPattern   = r'!ABV!: !(?P<abv>[\.\d]+%)!'
 rbDescPattern  = r'!COMMERCIAL DESCRIPTION!(?P<description>[^!]+)'
 rbScorePattern = r'(?P<score>\d+) at RateBeer!'
 rbAliasPattern = r'Proceed to the aliased beer...<br><br><A HREF="(?P<url>[^"]+)'
+rbNamePattern  = r'<TITLE>(?P<name>.+) - \d+ at RateBeer</TITLE>'
 
 def unescape(text):
     return unicode(BeautifulSoup(text))
@@ -113,6 +117,9 @@ def SearchForBeer(beer):
         except: pass     
 
         try:    data['description'] = unescape(re.search(rbDescPattern, text).group('description'))
+        except: pass
+
+        try:    data['name'] = unescape(re.search(rbNamePattern, html).group('name'))
         except: pass
 
     if data['baScore'] == 'N/A':

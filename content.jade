@@ -40,7 +40,7 @@ script(type='text/x-handlebars', data-template-name="bar")
           .text-center {{#if beer.baScore}} <a {{bindAttr href="beer.baUrl"}}> {{beer.baScore}} </a> {{else}} ? {{/if}}
         td
           .text-center {{#if beer.rbScore}} <a {{bindAttr href="beer.rbUrl"}}> {{beer.rbScore}} </a> {{else}} ? {{/if}}
-        td {{#if beer.abv}} {{beer.abv}} {{else}} ? {{/if}}
+        td {{#if beer.abv}} {{beer.abv}}% {{else}} ? {{/if}}
         td {{beer.name}}
         td.ellipsis {{beer.style}}
       | {{/each}} 
