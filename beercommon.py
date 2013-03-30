@@ -141,7 +141,7 @@ def DumpBeerToFixtures():
 
     replacementStyles = {
         "India Pale Ale (IPA)" : "IPA",
-        "Sour/Wild Ale": "Sour Ale",
+        "Sour Ale/Wild Ale": "Sour/Wild Ale",
         "Imperial/Double IPA": "Double IPA",
         "German Hefeweizen": "Hefeweizen",
         "American Pale Ale": "Pale Ale",
@@ -149,12 +149,25 @@ def DumpBeerToFixtures():
         "Premium Bitter/ESB": "ESB",
         "Premium Lager": "Lager",
         "Belgian White (Witbier)": "Witbier",
-        "Imperial/Strong Porter": "Imperial Porter"
+        "Imperial/Strong Porter": "Imperial Porter",
     }
 
     for k,v in beerData.items():
         if v['style'] in replacementStyles:
             v['style'] = replacementStyles[v['style']]
+
+        try: v['baScore'] = int(v['baScore'])
+        except: pass
+
+        try: v['rbScore'] = int(v['rbScore'])
+        except: pass
+
+        try: v['abv'] = float(v['abv'].replace('%',''))
+        except: pass
+
+        if v['baScore'] == '??': v['baScore'] = 0
+        if v['rbScore'] == '??': v['rbScore'] = 0
+        if v['abv']     == '':   v['abv']     = 0
 
         data = dict(v)
         del data['result']
