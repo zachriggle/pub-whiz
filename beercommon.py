@@ -140,7 +140,7 @@ def DumpBeerToFixtures():
     beers = []
 
     replacementStyles = {
-        "IPA" : "IPA",
+        "India Pale Ale (IPA)" : "IPA",
         "Sour/Wild Ale": "Sour Ale",
         "Imperial/Double IPA": "Double IPA",
         "German Hefeweizen": "Hefeweizen",
