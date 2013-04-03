@@ -10,16 +10,16 @@ html(lang='en')
     include js/ga.js
 
     link(href='css/normalize.css', rel='stylesheet')
-    link(href='css/bootstrap.min.css', rel='stylesheet')
-    link(href='css/bootstrap-responsive.min.css', rel='stylesheet')
-    link(href='css/font-awesome.min.css', rel='stylesheet')
-    link(href='css/style.css', rel='stylesheet')
+    link(href='//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/css/bootstrap.min.css', rel='stylesheet')
+    link(href='//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/css/bootstrap-responsive.min.css', rel='stylesheet')
+    link(href='//cdnjs.cloudflare.com/ajax/libs/font-awesome/3.0.2/css/font-awesome.min.css', rel='stylesheet')
+    link(href='//cdnjs.cloudflare.com/ajax/libs/normalize/2.1.0/normalize.css', rel='stylesheet')
 
     link(rel='shortcut icon', href='ico/favicon.ico')
-    link(rel='apple-touch-icon-precomposed', sizes='144x144', href='ico/apple-touch-icon-144-precomposed.png')
-    link(rel='apple-touch-icon-precomposed', sizes='114x114', href='ico/apple-touch-icon-114-precomposed.png')
-    link(rel='apple-touch-icon-precomposed', sizes='72x72', href='ico/apple-touch-icon-72-precomposed.png')
-    link(rel='apple-touch-icon-precomposed', href='ico/apple-touch-icon-57-precomposed.png')
+    //- link(rel='apple-touch-icon-precomposed', sizes='144x144', href='ico/apple-touch-icon-144-precomposed.png')
+    //- link(rel='apple-touch-icon-precomposed', sizes='114x114', href='ico/apple-touch-icon-114-precomposed.png')
+    //- link(rel='apple-touch-icon-precomposed', sizes='72x72', href='ico/apple-touch-icon-72-precomposed.png')
+    //- link(rel='apple-touch-icon-precomposed', href='ico/apple-touch-icon-57-precomposed.png')
   body
     #wrap
       #app
@@ -29,11 +29,11 @@ html(lang='en')
         p.muted.credit Created by 
           a(href='https://github.com/zachriggle') Zach Riggle
     // script ENV = { EXPERIMENTAL_CONTROL_HELPER: true }
-    script(src='js/jquery-1.9.1.min.js')
-    script(src='js/bootstrap.min.js')
-    script(src='http://html5shim.googlecode.com/svn/trunk/html5.js')  
-    script(src='js/handlebars.js')
-    script(src='js/ember.min.js')
+    script(src='//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js')
+    script(src='//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js')
+    script(src='//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.2/html5shiv.js')  
+    script(src='//cdnjs.cloudflare.com/ajax/libs/handlebars.js/1.0.0-rc.3/handlebars.min.js')
+    script(src='//cdnjs.cloudflare.com/ajax/libs/ember.js/1.0.0-rc.2/ember.min.js')
     script(src='js/ember-data.min.js')
     script(src='js/app.js')
     script(src='beer.js')
