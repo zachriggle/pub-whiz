@@ -9,66 +9,7 @@ _gaq.push(['_trackPageview']);
   ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
   var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 })();
-</script><link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/css/bootstrap.min.css" rel="stylesheet"><link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/css/bootstrap-responsive.min.css" rel="stylesheet"><link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/3.0.2/css/font-awesome.min.css" rel="stylesheet"><link href="//cdnjs.cloudflare.com/ajax/libs/normalize/2.1.0/normalize.css" rel="stylesheet"><style>html,
-body {
-  height: 100%;
-  /* The html and body elements cannot have any padding or margin. */
-}
-
-/* Wrapper for page content to push down footer */
-#wrap {
-  min-height: 100%;
-  height: auto !important;
-  height: 100%;
-  /* Negative indent footer by it's height */
-  margin: 0 auto -60px;
-}
-
-/* Set the fixed height of the footer here */
-#push,
-#footer {
-  height: 60px;
-}
-#footer {
-  background-color: #f5f5f5;
-}
-
-/* Lastly, apply responsive CSS fixes as necessary */
-@media (max-width: 767px) {
-  #footer {
-    margin-left: -20px;
-    margin-right: -20px;
-    padding-left: 20px;
-    padding-right: 20px;
-  }
-}
-
-@media (min-width: 980px) {
-  #app-main {
-    padding-top: 60px;
-  }
-}
-
-
-
-.container-fluid .credit {
-  margin: 20px 0;
-}
-
-.container-fluid {
-  margin-right: auto;
-  margin-left: auto;
-  max-width: 950px; /* or 950px */
-}
-
-
-@media (max-width: 320px) {
-  .hidden-portrait {
-    display: none !important;
-  }
-}
-
-</style><link rel="shortcut icon" href="ico/favicon.ico"></head><body><div id="wrap"><div id="app"></div><div id="push"></div></div><div id="footer"><div class="container-fluid"><p class="muted credit">Created by <a href="https://github.com/zachriggle">Zach Riggle</a></p></div></div><!-- script ENV = { EXPERIMENTAL_CONTROL_HELPER: true }--><script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script><script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.2/html5shiv.js"> </script><script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/1.0.0-rc.3/handlebars.min.js"></script><script src="//cdnjs.cloudflare.com/ajax/libs/ember.js/1.0.0-rc.2/ember.min.js"></script><script src="js/ember-data.min.js"></script><script src="js/app.js"></script><script src="beer.js"></script><script src="maxs_taphouse.js"></script><script src="frisco.js"></script><script src="alehouse.js"></script><script src="victoria.js"></script><script src="kloby.js"></script><script src="mahaffeys.js"></script><script type="text/x-handlebars" data-template-name="application">{{outlet nav}}<div id="app-main" class="container">{{outlet}}</div></script><script type="text/x-handlebars" data-template-name="index"><h1>Hello, wise beer drinkers!</h1><p class="lead"></p>Pub Whiz helps you make informed craft beer choices 
+</script><link href="css/normalize.css" rel="stylesheet"><link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/css/bootstrap.min.css" rel="stylesheet"><link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/css/bootstrap-responsive.min.css" rel="stylesheet"><link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/3.0.2/css/font-awesome.min.css" rel="stylesheet"><link href="//cdnjs.cloudflare.com/ajax/libs/normalize/2.1.0/normalize.css" rel="stylesheet"><link rel="shortcut icon" href="ico/favicon.ico"></head><body><div id="wrap"><div id="app"></div><div id="push"></div></div><div id="footer"><div class="container-fluid"><p class="muted credit">Created by <a href="https://github.com/zachriggle">Zach Riggle</a></p></div></div><!-- script ENV = { EXPERIMENTAL_CONTROL_HELPER: true }--><script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script><script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.2/html5shiv.js"> </script><script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/1.0.0-rc.3/handlebars.min.js"></script><script src="//cdnjs.cloudflare.com/ajax/libs/ember.js/1.0.0-rc.2/ember.min.js"></script><script src="js/ember-data.min.js"></script><script src="js/app.js"></script><script src="beer.js"></script><script src="maxs_taphouse.js"></script><script src="frisco.js"></script><script src="alehouse.js"></script><script src="victoria.js"></script><script src="kloby.js"></script><script src="mahaffeys.js"></script><script type="text/x-handlebars" data-template-name="application">{{outlet nav}}<div id="app-main" class="container">{{outlet}}</div></script><script type="text/x-handlebars" data-template-name="index"><h1>Hello, wise beer drinkers!</h1><p class="lead"></p>Pub Whiz helps you make informed craft beer choices 
 when you are out at the pub.
 Select a bar from the top to see the beers that are currently on tap,
 as well as their ratings from BeerAdvocate and RateBeer.</script><script type="text/x-handlebars" data-template-name="bar"><div class="row-fluid"><div class="page-header"> <h1>{{name}}</h1><h1> <small>{{description}}</small></h1></div><p>{{details}}</p><p class="pull-right"><i class="icon-home"></i>&nbsp; 
