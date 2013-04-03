@@ -4,12 +4,15 @@ html
     include js/ga.js
     script
       function doNotTrack() {
-      _gaq.push(['_setCustomVar',
-        1,                // This custom var is set to slot #1.  Required parameter.
-        'no_report',      // The name acts as a kind of category for the user activity.  Required parameter.
-        'true',           // This value of the custom variable.  Required parameter.
-        1                 // Sets the scope to session-level.  Optional parameter.
-      ]);
+        pageTracker._setCustomVar(
+          1,                // This custom var is set to slot #1.  Required parameter.
+          "Member Type",    // The name of the custom variable.  Required parameter.
+          "Premium",        // The value of the custom variable.  Required parameter.
+                            //  (possible values might be Free, Bronze, Gold, and Platinum)
+          1                 // Sets the scope to visitor-level.  Optional parameter.
+        );
+        pageTracker._trackPageview(); 
+
       }
 
   body(body onLoad="javascript:doNotTrack();")
