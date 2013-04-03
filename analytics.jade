@@ -2,4 +2,14 @@
 html
   head
     include js/ga.js
-  body(body onLoad="javascript:pageTracker._setVar('no_report');")
+    script
+      function doNotTrack() {
+      _gaq.push(['_setCustomVar',
+        1,                // This custom var is set to slot #1.  Required parameter.
+        'no_report',      // The name acts as a kind of category for the user activity.  Required parameter.
+        'true',           // This value of the custom variable.  Required parameter.
+        1                 // Sets the scope to session-level.  Optional parameter.
+      ]);
+      }
+
+  body(body onLoad="javascript:doNotTrack();")

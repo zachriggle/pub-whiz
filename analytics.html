@@ -9,4 +9,12 @@ _gaq.push(['_trackPageview']);
   ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
   var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 })();
-</script></head><body body onLoad="javascript:pageTracker._setVar('no_report');"></body></html>
+</script><script>function doNotTrack() {
+_gaq.push(['_setCustomVar',
+  1,                // This custom var is set to slot #1.  Required parameter.
+  'no_report',      // The name acts as a kind of category for the user activity.  Required parameter.
+  'true',           // This value of the custom variable.  Required parameter.
+  1                 // Sets the scope to session-level.  Optional parameter.
+]);
+}
+</script></head><body body onLoad="javascript:doNotTrack();"></body></html>
