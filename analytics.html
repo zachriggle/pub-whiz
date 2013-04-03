@@ -10,14 +10,12 @@ _gaq.push(['_trackPageview']);
   var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 })();
 </script><script>function doNotTrack() {
-  pageTracker._setCustomVar(
-    1,                // This custom var is set to slot #1.  Required parameter.
-    "Member Type",    // The name of the custom variable.  Required parameter.
-    "Premium",        // The value of the custom variable.  Required parameter.
-                      //  (possible values might be Free, Bronze, Gold, and Platinum)
-    1                 // Sets the scope to visitor-level.  Optional parameter.
-  );
-  pageTracker._trackPageview(); 
-  
+console.log("do not track");
+_gaq.push(['_setCustomVar',
+  1,                // This custom var is set to slot #1.  Required parameter.
+  'no_report',      // The name acts as a kind of category for the user activity.  Required parameter.
+  'true',           // This value of the custom variable.  Required parameter.
+  1                 // Sets the scope to session-level.  Optional parameter.
+]);
 }
 </script></head><body body onLoad="javascript:doNotTrack();"></body></html>
