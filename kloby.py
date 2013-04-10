@@ -10,6 +10,7 @@ import re
 percent = '\d+\.?\d* *%'
 quoteToEnd = '"[^"]+$'
 alphaNumSpace = '[^A-Za-z0-9 ]'
+lowerUpperLower = '([a-z])([A-Z])([a-z])'
 
 url    = 'http://www.klobysbbq.com/beer-baltimore-best-bbq-ribs-barbebue-chicken-laurel-county-md.php'
 data   = urllib2.urlopen(url).read()
@@ -48,6 +49,7 @@ for line in ocrData.split('\n'):
   line = re.sub(percent, "", line)
   line = re.sub(quoteToEnd, "", line)
   line = re.sub(alphaNumSpace, "", line)
+  line = re.sub(lowerUpperLower, "\\1 \\2 \\3", line)
   beerNames.append(line)
 
 results = SearchForBeers(beerNames)
