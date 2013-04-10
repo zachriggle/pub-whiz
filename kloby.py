@@ -1,40 +1,53 @@
 import urllib2
 from bs4 import BeautifulSoup
 from beercommon import SearchForBeers, DumpBarToFixtures
+import subprocess
+import ocr
+import tempfile
+import os.path
 
-beerNames = [
-"Flying Dog - Single Hop Galaxy",
-"Blue Mountain Brewery - Barrel Collection Mandolin",
-"Duclaw - Naked Fish",
-"New Belgium Brewing - Fat Tire",
-"Fox Barrel - As You Wish Cider",
-"Lefebvre - Hopus",
-"Blue Mountain Brewery - Barrel Aged Dirty Belgian",
-"Widmer Brothers Brewing - Nelson",
-"Bud Light",
-"Murphy's Irish Stout",
-"DuClaw - Celtic Fury Irish Nitro",
-"Murphy's - Irish Stout Nitro",
-"Murphy's - Irish Red",
-"Kilkenny - Irish Cream Ale",
-"Harpoon - Celtic Red Ale",
-"Guinness Stout",
-"Widmer Brothers - O'ryely",
-"Blue Point Brewing - No Apologies",
-"Flying Dog - Lucky SOB",
-"Devils Backbone - 8 Point",
-"Devils Backbone - Vienna Lager",
-"Devils Backbone - Reilly's Red Ale",
-"Devils Backbone - Schwartz Bier",
-"Devils Backbone - Kilt Flasher",
-"Devils Backbone - Heavy Seas Big DIPA",
-"Brooklyn Brewery - Black",
-"Brooklyn Brewery - Sorachi Ace",
-"Brooklyn Brewery - Bown Ale",
-"Brooklyn Brewery - Brooklyn East IPA",
-"Heavy Seas - Loose Cannon",
-"Starr Hill - The Gift"
-]
+percent = '\d+\.?\d* *%'
+quoteToEnd = '"[^"]+$'
+alphaNumSpace = '[^A-Za-z0-9 ]'
+
+url    = 'http://www.klobysbbq.com/beer-baltimore-best-bbq-ribs-barbebue-chicken-laurel-county-md.php'
+data   = urllib2.urlopen(url).read()
+soup   = BeautifulSoup(data)
+images = [img.get('src') for img in soup.findAll('img')]
+want   = None
+
+#
+# Kloby's website is pretty inconsistent
+# 
+for image in images:
+  if 'BeerList' in image:
+    want = image
+  if 'BeerScreen' in image:
+    want = image
+  if 'Presentation' in image:
+    want = image
+
+if 'http' not in want:
+  want = 'http://www.klobysbbq.com/' + want
+
+imageData = urllib2.urlopen(want).read()
+imgFile   = tempfile.mktemp(os.path.basename(want))
+
+file(imgFile,'wb+').write(imageData)
+
+ocrData = ocr.ocr(imgFile)
+
+beerNames = []
+
+for line in ocrData.split('\n'):
+
+  if len(line.strip()) == 0:  continue
+  if 'Today' in line:         continue
+
+  line = re.sub(percent, "", line)
+  line = re.sub(quoteToEnd, "", line)
+  line = re.sub(alphaNumSpace, "", line)
+  beerNames.append(line)
 
 results = SearchForBeers(beerNames)
 
