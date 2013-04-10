@@ -21,6 +21,7 @@ Requirements
 - Python 2.7
 - BeautifulSoup 4
 - Jade
+- gocr, libjpeg
 
 Usage
 ====
