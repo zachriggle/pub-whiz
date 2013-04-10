@@ -11,7 +11,7 @@ beersNamesUnicode = []
 
 for page in [1,2,3]:
   url  = "http://victoriagastropub.com/?menutype=beer&paged=%s" % page
-  data = urllib2.urlopen(url).read()
+  data = urllib2.urlopen(url, timeout=15).read() or ""
   soup = BeautifulSoup(data)
 
   beersNamesUnicode += soup.findAll('h2', 'menu-title')
