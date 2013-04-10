@@ -192,8 +192,8 @@ App.Beer.FIXTURES = %s
 def DumpBarToFixtures(filename, beerNames, barData):
     global beerData
 
-    for k,v in beerData.items():
-        print "%d %s (%s)" % (v['id'], v['name'], k)
+    # for k,v in beerData.items():
+    #    print "%d %s (%s)" % (v['id'], v['name'], k)
 
     barData['beers'] = [beerData[name]["id"] for name in beerNames]
 
