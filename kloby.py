@@ -5,6 +5,7 @@ import subprocess
 import ocr
 import tempfile
 import os.path
+import re
 
 percent = '\d+\.?\d* *%'
 quoteToEnd = '"[^"]+$'
