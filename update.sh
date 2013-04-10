@@ -1,13 +1,13 @@
 #!/bin/sh
 git stash save
 git checkout master
-python maxs.py
-python frisco.py 
-python victoria.py
-python alehouse.py
-python kloby.py
-python mahaffeys.py
-python arundel.py
+echo "Maxs" && python maxs.py
+echo "Frisco" && python frisco.py 
+echo "VGP" && python victoria.py
+echo "Alehosue" && python alehouse.py
+echo "Kloby" && python kloby.py
+echo "Mahaffey" && python mahaffeys.py
+echo "Arundel" && python arundel.py
 jade index.jade
 git add -u
 git commit -m "Updated on $(date)"
