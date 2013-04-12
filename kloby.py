@@ -28,6 +28,8 @@ for image in images:
     want = image
   if 'Presentation' in image:
     want = image
+  if '5THYear' in image:
+    want = image
 
 if 'http' not in want:
   want = 'http://www.klobysbbq.com/' + want
