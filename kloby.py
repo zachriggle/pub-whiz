@@ -15,18 +15,21 @@ lowerUpperLower = '([a-z])([A-Z])([a-z])'
 url    = 'http://www.klobysbbq.com/beer-baltimore-best-bbq-ribs-barbebue-chicken-laurel-county-md.php'
 data   = urllib2.urlopen(url).read()
 soup   = BeautifulSoup(data)
-images = [img.get('src') for img in soup.findAll('img')]
+images = [img.get('src') for img in soup.findAll('input')]
 want   = None
 
 #
 # Kloby's website is pretty inconsistent
 # 
+
 for image in images:
   if 'BeerList' in image:
     want = image
   if 'BeerScreen' in image:
     want = image
   if 'Presentation' in image:
+    want = image
+  if 'BeerScreen' in image:
     want = image
 
 if 'http' not in want:
