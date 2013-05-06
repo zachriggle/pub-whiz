@@ -1,4 +1,4 @@
 
 $(function () {
-App.Bar.FIXTURES.push({"map": "http://goo.gl/maps/QJnV4", "description": "", "url": "http://www.klobysbbq.com/", "name": "Kloby's Smokehouse", "beers": [740, 741, 693, 694, 695, 696, 395, 742, 667, 668, 669, 601, 565, 566, 602, 231, 670, 571, 426, 429, 604, 432, 434, 435, 437, 438, 439, 743, 744, 443, 574, 444, 158, 449], "id": 5, "deatils": ""});
+App.Bar.FIXTURES.push({"map": "http://goo.gl/maps/QJnV4", "description": "", "url": "http://www.klobysbbq.com/", "name": "Kloby's Smokehouse", "beers": [756, 757, 758, 759, 760, 695, 761, 17, 762, 763, 694, 696, 395, 666, 669, 601, 565, 566, 764, 765, 571, 766, 692, 434, 437, 438, 439, 384, 219, 443, 574, 444, 158, 151], "id": 5, "deatils": ""});
 })
