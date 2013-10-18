@@ -1,4 +1,0 @@
-
-$(function () {
-App.Bar.FIXTURES.push({"map": "http://goo.gl/maps/kKMNp", "description": "Delicious regional American food and Columbia's largest selection of micro-brews on tap.", "url": "http://www.friscogrille.com", "beers": [1710, 1711, 297, 1891, 1892, 645, 1893, 1894, 1895, 1896, 1714, 1716, 1717, 1718, 1719, 1897, 211, 1898, 1724, 1727, 1899, 314, 1900, 1901, 1902, 1903, 225, 721, 1730, 1904, 1732, 1905, 1906, 1907, 1735, 1736, 1737, 1908, 232, 521, 1738, 1740, 1741, 328, 1909, 569, 1746, 1910, 1748, 469, 1911, 1750, 1912, 1913, 1914], "details": "A restaurant serving Southwestern cuisine, Frisco's real draw is its outstanding beer program, with 50 beers on draft, including two cask ales, and brews its own ales on site. (Look for the Push Craft Brewing taps.)", "id": 2, "name": "Frisco Grille"});
-})
