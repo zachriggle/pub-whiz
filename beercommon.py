@@ -48,11 +48,12 @@ def search(query):
 
 def SearchForBeer(beer):
     # cached?
+    print beer
     if beer in beerData: 
         return beerData[beer]
 
     data = { 
-        'name': beer,
+        'name': beer.title(),
         'originalName': beer,
         'result': '', 
         'baUrl': "http://google.com/?q=%s" % beer,
@@ -113,29 +114,30 @@ def SearchForBeer(beer):
         except: pass
 
         try:    data['abv']   = re.search(rbAbvPattern, text).group('abv')
-        except: pass     
+        except: pass
 
         try:    data['description'] = unescape(re.search(rbDescPattern, text).group('description'))
         except: pass
 
-        try:     
+        try:    
             name = re.search(rbNamePattern, html).group('name')
             if(name):
                 data['name'] = unescape(name)
         except Exception, e: 
-            print e
+            pass
 
     if data['baScore'] == 'N/A':
         data['baScore'] = '??'
     
-    print data['name']
+    print data
     return data
 
 def SearchForBeers(beerNames):
     global beerData
-    pool = multiprocessing.Pool()
+    # pool = multiprocessing.Pool()
 
-    results = pool.map(SearchForBeer, beerNames)
+    # results = pool.map(SearchForBeer, beerNames)
+    results = map(SearchForBeer, beerNames)
 
     for result in results:
         if result['originalName'] not in beerData.keys():
@@ -168,13 +170,13 @@ def DumpBeerToFixtures():
             v['style'] = replacementStyles[v['style']]
 
         try: v['baScore'] = int(v['baScore'])
-        except: pass
+        except: print "Exception: BAscore"
 
         try: v['rbScore'] = int(v['rbScore'])
-        except: pass
+        except: print "Exception: RBscore"
 
         try: v['abv'] = float(v['abv'].replace('%',''))
-        except: pass
+        except: print "Exception: ABV"
 
         if v['baScore'] == '??': v['baScore'] = 0
         if v['rbScore'] == '??': v['rbScore'] = 0
