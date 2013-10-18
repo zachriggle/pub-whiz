@@ -21,9 +21,9 @@ rbQuery      = ' site:ratebeer.com/beer'
 rbStylePattern = r'!Style: !(?P<style>[^!]+)'
 rbAbvPattern   = r'!ABV!: !(?P<abv>[\.\d]+%)!'
 rbDescPattern  = r'!COMMERCIAL DESCRIPTION!(?P<description>[^!]+)'
-rbScorePattern = r'(?P<score>\d+) at RateBeer!'
+rbScorePattern = r'!overall!(?P<score>\d+)!\d+!'
 rbAliasPattern = r'Proceed to the aliased beer...<br><br><A HREF="(?P<url>[^"]+)'
-rbNamePattern  = r'<TITLE>(?P<name>.+) - \d+ at RateBeer</TITLE>'
+rbNamePattern  = r'<TITLE>(?P<name>.+)</TITLE>'
 
 def unescape(text):
     return unicode(BeautifulSoup(text)).encode('utf-8')
