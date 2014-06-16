@@ -1,23 +1,32 @@
-#!/usr/bin/python
-# -*- coding: utf-8 -*-
 import urllib2
+from bs4 import BeautifulSoup
 from beercommon import SearchForBeers, DumpBarToFixtures
 
-beerNames = []
-for line in file('snallygaster.txt'):
-  beerNames.append(line)
+url  = "http://www.duclaw.com/nowontap.aspx"
+data = urllib2.urlopen(url).read()
+soup = BeautifulSoup(data)
+
+locations = soup.findAll('td', 'beerhead')
+
+beersNamesUnicode = []
+
+for loc in locations:
+  try:
+    locName = loc.find('a').contents[-1]
+    if locName == 'Arundel Mills':
+      barImages = loc.findAll('img')
+      beersNamesUnicode = [i.get('alt') for i in barImages]
+  except: pass
+
+beerNames         = ['DuClaw ' + i.encode('utf-8') for i in beersNamesUnicode]
 
 results = SearchForBeers(beerNames)
 
 DumpBarToFixtures("arundel.js", beerNames, {
   'id': 7,
-  'name': "Snallygaster",
-  'description': """Named for the fearsome and toothy mythical beast said to terrorize the region at the turn of the century,
-Snallygaster returns once again to DC as a rollicking celebration of craft beer, ﬁne food, music and more.
-For one day and one day only we'll simultaneously unleash more than 200 incomparable craft beers on the grounds
-of Union Market DC against a backdrop featuring the area's top toques, the best of the best food trucks,
-music, entertainment and family fun.""",
+  'name': "DuClaw",
+  'description': "The #1 craft brewery in Maryland (ratebeer.com), DuClaw Brewing Company offers award winning handcrafted beers with tastes and flavors as provocative as their names.",
   'details': "",
-  'url': "https://docs.google.com/file/d/0BxdmODFjEQHRcDNFTHIwQUNjcjg/edit?usp=sharing&pli=1",
-  'map': "http://goo.gl/maps/vefQz",
+  'url': "http://www.duclaw.com",
+  'map': "http://goo.gl/maps/gMS7W",
 })
