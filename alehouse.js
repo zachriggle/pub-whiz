@@ -1,4 +1,44 @@
 
 $(function () {
-App.Bar.FIXTURES.push({"map": "http://goo.gl/maps/IlqCL", "description": "The Ale House Columbia is Howard County's destination for craft beers, food and nightlife. Come see what makes us more than the typical pub or sports bar.", "url": "http://www.thealehousecolumbia.com", "beers": [159, 160, 161, 162, 163, 164, 164, 166, 167, 168, 168, 169, 171, 172, 172, 172, 173, 176, 176, 178, 175, 180, 181, 181, 183, 182, 185, 185, 187, 188, 189], "details": "", "id": 3, "name": "The Ale House"});
+App.Bar.FIXTURES.push({
+    "beers": [
+        84,
+        85,
+        86,
+        87,
+        88,
+        89,
+        90,
+        91,
+        92,
+        93,
+        94,
+        95,
+        95,
+        96,
+        98,
+        99,
+        100,
+        98,
+        102,
+        103,
+        104,
+        109,
+        105,
+        106,
+        107,
+        108,
+        110,
+        111,
+        112,
+        113,
+        114
+    ],
+    "description": "The Ale House Columbia is Howard County's destination for craft beers, food and nightlife. Come see what makes us more than the typical pub or sports bar.",
+    "details": "",
+    "id": 3,
+    "map": "http://goo.gl/maps/IlqCL",
+    "name": "The Ale House",
+    "url": "http://www.thealehousecolumbia.com"
+});
 })

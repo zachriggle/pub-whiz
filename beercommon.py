@@ -45,14 +45,14 @@ def search(query):
     return json.loads(data)['d']['results']
 
 def SearchForBeer(beer):
-    print beer
+    # print beer
     # cached?
     db  = pymongo.MongoClient()['pubwhiz']['beer']
-    one = db.find_one({'originalName': beer})
-    if one:
-        print 'CACHED'
-        print one
-        return one
+    data = db.find_one({'originalName': beer})
+    if data:
+        # print 'CACHED'
+        print "%s %s" % (data['id'], data)
+        return data
 
     data = {
         'name': beer.title(),
@@ -131,13 +131,13 @@ def SearchForBeer(beer):
     if data['baScore'] == 'N/A':
         data['baScore'] = '??'
 
-    data['id']=db.count()
+    data['id']=db.count()+1
     db.save(data)
-    print data
+    print "%s %s" % (data['id'], data)
     return data
 
 def SearchForBeers(beerNames):
-    print beerNames
+    # print beerNames
     return multiprocessing.Pool(1 + len(beerNames)).map(SearchForBeer, beerNames)
 
 
@@ -183,7 +183,7 @@ def DumpBeerToFixtures():
 
     file('beer.js','w+').write("""
 App.Beer.FIXTURES = %s
-""" % json.dumps(beers))
+""" % json.dumps(beers, sort_keys=True, indent=4, separators=(',', ': ')))
 
 def DumpBarToFixtures(filename, beerNames, barData):
     coll = []
@@ -194,6 +194,6 @@ def DumpBarToFixtures(filename, beerNames, barData):
 $(function () {
 App.Bar.FIXTURES.push(%s);
 })
-""" % json.dumps(barData))
+""" % json.dumps(barData, sort_keys=True, indent=4, separators=(',', ': ')))
 
     DumpBeerToFixtures()

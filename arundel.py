@@ -1,25 +1,25 @@
 import urllib2
 from bs4 import BeautifulSoup
 from beercommon import SearchForBeers, DumpBarToFixtures
+import re
+import codecs
 
-url  = "http://www.duclaw.com/nowontap.aspx"
+url  = "http://www.duclaw.com/wp-content/themes/duclaw/loopHandler_OnTap.php?numPosts=100&pageNumber=1&catID=0&taxTerm=location-arundel-mills"
 data = urllib2.urlopen(url).read()
 soup = BeautifulSoup(data)
+pat  = r'.*/beer/(.*)/'
 
-locations = soup.findAll('td', 'beerhead')
+links = [link.get('href') for link in soup.findAll('a')]
 
-beersNamesUnicode = []
 
-for loc in locations:
-  try:
-    locName = loc.find('a').contents[-1]
-    if locName == 'Arundel Mills':
-      barImages = loc.findAll('img')
-      beersNamesUnicode = [i.get('alt') for i in barImages]
-  except: pass
 
-beerNames         = ['DuClaw ' + i.encode('utf-8') for i in beersNamesUnicode]
+def ProcessLink(link):
+  url      = link.get('href')
+  beerName = re.search(pat, url).group(1)
+  return codecs.encode('DuClaw ' + beerName.replace('-', ' '), 'utf-8')
 
+beerNames = map(ProcessLink, soup.findAll('a'))
+print beerNames
 results = SearchForBeers(beerNames)
 
 DumpBarToFixtures("arundel.js", beerNames, {
