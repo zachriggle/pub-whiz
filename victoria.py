@@ -14,7 +14,7 @@ for page in [1,2,3]:
   data = urllib2.urlopen(url, timeout=15).read() or ""
   soup = BeautifulSoup(data)
 
-  beersNamesUnicode += soup.findAll('h2', 'menu-title')
+  beersNamesUnicode += soup.findAll('h4', 'menu-title')
 
 beerNames = [i.contents[1].encode('utf-8') for i in beersNamesUnicode]
 

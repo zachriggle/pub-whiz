@@ -6,14 +6,12 @@ import sys
 import pprint
 import HTMLParser
 import multiprocessing
+import pymongo
 from bs4 import BeautifulSoup
 
-try:
-    from cache import beers as beerData
-except:
-    beerData = {}
+db = pymongo.MongoClient()['pubwhiz']['beer']
 
-baUrlPattern   =r'http://beeradvocate.com/beer/profile/\d+/\d+(\?.*)?'
+baUrlPattern   =r'http://(www.)?beeradvocate.com/beer/profile/\d+/\d+(\?.*)?'
 baScorePattern =r'(?P<score>(\d+|N/A)) out of 100'
 baQuery      = ' "out of 100 based on" site:beeradvocate.com'
 
@@ -33,29 +31,33 @@ def search(query):
     key        = 'uPEdkg+ybWk/vZjHh7EX+WH3NAFoPaDuvr4WD9VgJDs='
     creds      = (':%s' % key).encode('base64')[:-1]
     auth       = 'Basic %s' % creds
-    
+
     query      = urllib2.quote("'%s'" % query)
     request    = urllib2.Request('https://api.datamarket.azure.com/Bing/SearchWeb/v1/Web?Query=%s&$top=5&$format=json' % query)
 
     request.add_header('Authorization', auth)
     request.add_header('User-Agent', user_agent)
-    
+
     requestor = urllib2.build_opener()
-    result    = requestor.open(request) 
+    result    = requestor.open(request)
     data      = result.read()
 
     return json.loads(data)['d']['results']
 
 def SearchForBeer(beer):
-    # cached?
     print beer
-    if beer in beerData: 
-        return beerData[beer]
+    # cached?
+    db  = pymongo.MongoClient()['pubwhiz']['beer']
+    one = db.find_one({'originalName': beer})
+    if one:
+        print 'CACHED'
+        print one
+        return one
 
-    data = { 
+    data = {
         'name': beer.title(),
         'originalName': beer,
-        'result': '', 
+        'result': '',
         'baUrl': "http://google.com/?q=%s" % beer,
         'rbUrl': "http://google.com/?q=%s" % beer,
         'baScore': '??',
@@ -69,7 +71,7 @@ def SearchForBeer(beer):
     # Search for BeerAdvocate
     #
     results = search(beer + baQuery)
-    
+
     for result in results:
 
         # only care about results that look like:
@@ -119,37 +121,27 @@ def SearchForBeer(beer):
         try:    data['description'] = unescape(re.search(rbDescPattern, text).group('description'))
         except: pass
 
-        try:    
+        try:
             name = re.search(rbNamePattern, html).group('name')
             if(name):
                 data['name'] = unescape(name)
-        except Exception, e: 
+        except Exception, e:
             pass
 
     if data['baScore'] == 'N/A':
         data['baScore'] = '??'
-    
+
+    data['id']=db.count()
+    db.save(data)
     print data
     return data
 
 def SearchForBeers(beerNames):
-    global beerData
-    # pool = multiprocessing.Pool()
-
-    # results = pool.map(SearchForBeer, beerNames)
-    results = map(SearchForBeer, beerNames)
-
-    for result in results:
-        if result['originalName'] not in beerData.keys():
-            result['id'] =  1 + len(beerData)
-            beerData[result['originalName']] = result
-
-    file('cache.py','w+').write('beers = %s\n' % pprint.pformat(beerData))
+    print beerNames
+    return multiprocessing.Pool(1 + len(beerNames)).map(SearchForBeer, beerNames)
 
 
 def DumpBeerToFixtures():
-    global beerData
-
     beers = []
 
     replacementStyles = {
@@ -165,7 +157,7 @@ def DumpBeerToFixtures():
         "Imperial/Strong Porter": "Imperial Porter",
     }
 
-    for k,v in beerData.items():
+    for v in db.find():
         if v['style'] in replacementStyles:
             v['style'] = replacementStyles[v['style']]
 
@@ -182,22 +174,21 @@ def DumpBeerToFixtures():
         if v['rbScore'] == '??': v['rbScore'] = 0
         if v['abv']     == '':   v['abv']     = 0
 
+        del v['_id']
+
         data = dict(v)
         del data['result']
         beers.append(data)
 
-    
+
     file('beer.js','w+').write("""
 App.Beer.FIXTURES = %s
 """ % json.dumps(beers))
 
 def DumpBarToFixtures(filename, beerNames, barData):
-    global beerData
-
-    # for k,v in beerData.items():
-    #    print "%d %s (%s)" % (v['id'], v['name'], k)
-
-    barData['beers'] = [beerData[name]["id"] for name in beerNames]
+    coll = []
+    beers = db.find({'originalName': {'$in': beerNames}}, {'id': 1})
+    barData['beers'] = [i['id'] for i in beers]
 
     file(filename,'w+').write("""
 $(function () {
