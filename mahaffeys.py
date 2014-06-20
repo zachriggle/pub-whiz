@@ -14,8 +14,8 @@ text = BeautifulSoup(data).get_text('!').encode('utf-8')
 
 beerNamesUnicode = re.findall(r'\(D\) *([^\r\n]+)',text)
 
-beerNames = [i.encode('utf-8') for i in beerNamesUnicode]
-
+beerNames = [i.decode('utf-8') for i in beerNamesUnicode]
+print beerNames
 results = SearchForBeers(beerNames)
 
 DumpBarToFixtures("mahaffeys.js", beerNames, {
