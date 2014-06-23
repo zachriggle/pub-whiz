@@ -138,8 +138,8 @@ def SearchForBeer(beer):
 
 def SearchForBeers(beerNames):
     # print beerNames
-    return map(SearchForBeer, beerNames)
-    # return multiprocessing.Pool(1 + len(beerNames)).map(SearchForBeer, beerNames)
+    # return map(SearchForBeer, beerNames)
+    return multiprocessing.Pool(10).map(SearchForBeer, beerNames)
 
 
 def DumpBeerToFixtures():
