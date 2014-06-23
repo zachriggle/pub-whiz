@@ -2,21 +2,21 @@
 $(function () {
 App.Bar.FIXTURES.push({
     "beers": [
+        247,
+        248,
+        249,
+        250,
+        251,
+        252,
+        253,
+        254,
+        255,
         256,
         257,
         258,
         259,
         260,
-        261,
-        262,
-        263,
-        264,
-        265,
-        266,
-        267,
-        268,
-        269,
-        270
+        261
     ],
     "description": "The #1 craft brewery in Maryland (ratebeer.com), DuClaw Brewing Company offers award winning handcrafted beers with tastes and flavors as provocative as their names.",
     "details": "",

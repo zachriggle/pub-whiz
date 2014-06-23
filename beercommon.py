@@ -139,7 +139,12 @@ def SearchForBeer(beer):
 def SearchForBeers(beerNames):
     # print beerNames
     # return map(SearchForBeer, beerNames)
-    return multiprocessing.Pool(10).map(SearchForBeer, beerNames)
+    beers = multiprocessing.Pool(10).map(SearchForBeer, beerNames)
+    for beer in beers:
+        if 'id' not in beer:
+            beer['id'] = db.count()+1
+            db.save(beer)
+    return beers
 
 
 def DumpBeerToFixtures():
